@@ -312,7 +312,7 @@ Int RadioSoundInstance = -1
 
 Function Update()
 
-	   While fVersion < 12.46
+	   While fVersion < 12.5
 			 Patch()                       
 	EndWhile
 
@@ -344,272 +344,7 @@ Function Patch()
                Int Version11 = 11
                Int Version12 = 12
 		   
-		       If fVersion < 11.21
-			      fVersion = 11.21
-				     If StartStarvival.GetValue() == 1
-						PlayerRef.RemoveSpell(SuitSystemMonitorUISpellWatchHUD)
-						Utility.Wait(1.0)
-						PlayerRef.AddSpell(SuitSystemMonitorUISpellWatchHUD, False)
-                  EndIf
-		   ElseIf fVersion < 11.22
-			      fVersion = 11.22
-				     If StartStarvival.GetValue() == 1
-						   If BoostpackFuel_Toggle.GetValue() == 1
-	                          Utility.SetINIFloat("fZeroGBoostDrainInitial:Boostpack", 0.0)	
-	                          Utility.SetINIFloat("fZeroGBoostDrainSustained:Boostpack", 0.0)	
-	                          Utility.SetINIFloat("fZeroGBoostMinFuelRequired:Boostpack", 5.0)
-						EndIf
-                  EndIf			
-		   ElseIf fVersion < 11.25
-			      fVersion = 11.25
-				     If StartStarvival.GetValue() == 1
-						   If OverencumbranceToggle.GetValue() == 1
-						      PlayerRef.RemoveSpell(OverencumbranceSpell)
-						      Utility.Wait(1.0)
-						      PlayerRef.AddSpell(OverencumbranceSpell, False)
-						EndIf
-						   If SurvivalToggler.GetValue() == 1
-						      (QuestBasicNeeds as SISA_BasicNeeds).Update()	
-						EndIf
-						   If GV_EnviHazardsToggle.GetValue() == 1
-						      (QuestEnviHazards as SISA_EnviHazardsQuest).Update()
-						EndIf
-                  EndIf	
-		   ElseIf fVersion < 11.5
-			      fVersion = 11.5
-				     If StartStarvival.GetValue() == 1
-						   If SurvivalToggler.GetValue() == 1
-						      (QuestBasicNeeds as SISA_BasicNeeds).Update()	
-						EndIf
-                  EndIf	
-		   ElseIf fVersion < 11.53
-			      fVersion = 11.53
-				     If StartStarvival.GetValue() == 1
-						   If SurvivalToggler.GetValue() == 1
-						      (QuestBasicNeeds as SISA_BasicNeeds).Update()	
-						EndIf
-                  EndIf	
-		   ElseIf fVersion < 11.6
-			      fVersion = 11.6
-				     If StartStarvival.GetValue() == 1
-                        InstallIngameTutorials()
-						   If GV_FameAndReputationToggle.GetValue() == 1
-						     (QuestFameAndRep as SISA_FameAndRepMB).Update()
-						EndIf
-						   If GV_EnviHazardsToggle.GetValue() == 1
-						      (QuestEnviHazards as SISA_EnviHazardsQuest).Update()
-						EndIf
-                           If WeaponHandlingStaminaControl_Toggle.GetValue() == 1
-		                      PlayerRef.Removeperk(WeaponControlDebuffPerk)
-                              Utility.Wait(0.3)
-							  PlayerRef.Addperk(WeaponControlDebuffPerk, False)
-						EndIf
-						Utility.Wait(1.0)
-		                PlayerRef.AddSpell(ComplicatedTheftSpell, False) 
-                  EndIf	
-		   ElseIf fVersion < 11.61
-			      fVersion = 11.61
-				     If StartStarvival.GetValue() == 1
-						   If CrewRationsToggle.GetValue() == 1
-						     (QuestCrewMorale as SISA_CrewMorale).Update()
-						EndIf
-                  EndIf	
-		   ElseIf fVersion < 11.8
-			      fVersion = 11.8
-				     If StartStarvival.GetValue() == 1
-						   If GV_EnviHazardsToggle.GetValue() == 1
-						      (QuestEnviHazards as SISA_EnviHazardsQuest).Update()
-						EndIf
-						   If SurvivalToggler.GetValue() == 1
-						      (QuestBasicNeeds as SISA_BasicNeeds).Update()	
-						EndIf
-						   If IntoxicationStarter.GetValue() == 1
-						      (QuestIntoxAddiction as SISA_Intoxaddiction).Update() 
-						EndIf
-						   If CrewRationsToggle.GetValue() == 1
-						      (QuestCrewMorale as SISA_CrewMorale).Update()
-						EndIf
-						   If GV_EquipmentDegradationToggle.GetValue() == 1
-						      (QuestDegradeSystems as SISA_RepairSystemQuest).Update()
-						EndIf
-	                    RegisterForActorValueChangedEvent(PlayerRef, Oxygen)
-	                    RegisterForActorValueChangedEvent(PlayerRef, Soak)
-	                    RegisterForActorValueChangedEvent(PlayerRef, BoostpackFuelAV)
-                  EndIf	
-		   ElseIf fVersion < 11.81
-			      fVersion = 11.81
-				     If StartStarvival.GetValue() == 1
-						   If RoverSytems_PerkToggle.GetValue() == 1
-						      (QuestRoverSystems as SISA_Rover).Update()
-						EndIf
-						   If SurvivalToggler.GetValue() == 1
-						      (QuestBasicNeeds as SISA_BasicNeeds).Update()	
-						EndIf
-                  EndIf	
-		   ElseIf fVersion < 11.87
-			      fVersion = 11.87
-				     If StartStarvival.GetValue() == 1
-						   If GV_EquipmentDegradationToggle.GetValue() == 1
-						      (QuestDegradeSystems as SISA_RepairSystemQuest).Update()
-						EndIf
-                        PlayerRef.RemoveSpell(SuitSystemMonitorUISpell)
-                        Utility.Wait(0.5)
-						PlayerRef.Addspell(SuitSystemMonitorUISpell, false)
-                  EndIf	
-		   ElseIf fVersion < 11.90
-			      fVersion = 11.90
-				     If StartStarvival.GetValue() == 1
-		                GlobalVariable MaintenanceCostShipMult = Game.GetFormFromFile(0x00000CCB, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-		                GlobalVariable MaintenanceCostRoverMult = Game.GetFormFromFile(0x00001346, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-		                GlobalVariable RoverMaintenanceThresholdMIN = Game.GetFormFromFile(0x000020D4, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-		                GlobalVariable RoverMaintenanceThresholdMAX = Game.GetFormFromFile(0x000020D3, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-		                GlobalVariable RoverMaintenanceKitRestoreBase = Game.GetFormFromFile(0x000020D5, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-		                GlobalVariable AddichroneRestore = Game.GetFormFromFile(0x000009BD, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-		                GlobalVariable AddichroneTimer = Game.GetFormFromFile(0x000009BC, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-                        MaintenanceCostShipMult.SetValue(300)
-                        MaintenanceCostRoverMult.SetValue(1.9)
-                        RoverMaintenanceThresholdMIN.SetValue(25)
-                        RoverMaintenanceThresholdMAX.SetValue(75)
-                        RoverMaintenanceKitRestoreBase.SetValue(20)
-                        AddichroneRestore.SetValue(0.4)
-						AddichroneTimer.SetValue(15)
-						PlayerRef.Addperk(CollectionBuddiesPerk, False)
-						Utility.Wait(1.0)
-		                PlayerRef.AddSpell(SnowGlobeSpell, False) 
-				  EndIf	
-		   ElseIf fVersion < 11.91
-			      fVersion = 11.91
-				     If StartStarvival.GetValue() == 1   
-						   If GV_EquipmentDegradationToggle.GetValue() == 1
-						      (QuestDegradeSystems as SISA_RepairSystemQuest).Update()
-						EndIf
-				  EndIf	
-		   ElseIf fVersion < 11.92
-			      fVersion = 11.92
-				     If StartStarvival.GetValue() == 1   
-						   If GV_FameAndReputationToggle.GetValue() == 1
-						     (QuestFameAndRep as SISA_FameAndRepMB).Update()
-						EndIf
-				  EndIf	
-		   ElseIf fVersion < 11.93
-			      fVersion = 11.93
-				     If StartStarvival.GetValue() == 1   
-		                GlobalVariable JunkFlushNeedsDebuff = Game.GetFormFromFile(0x00000854, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-		                GlobalVariable EnviroAbsorberNeedsDebuff = Game.GetFormFromFile(0x00000850, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-		                GlobalVariable SpaceshipGravJumpMaintenanceDMG = Game.GetFormFromFile(0x00000CD3, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-                        JunkFlushNeedsDebuff.SetValue(75)
-                        EnviroAbsorberNeedsDebuff.SetValue(50)
-                        SpaceshipGravJumpMaintenanceDMG.SetValue(6)
-				  EndIf	
-		   ElseIf fVersion < 11.95
-			      fVersion = 11.95
-				     If StartStarvival.GetValue() == 1   
-						PlayerRef.Addperk(CompanionQuickAccessPerk, False)
-				  EndIf	
-		   ElseIf fVersion < 11.97
-			      fVersion = 11.97
-				     If StartStarvival.GetValue() == 1   
-						   If GV_FameAndReputationToggle.GetValue() == 1
-						     (QuestFameAndRep as SISA_FameAndRepMB).Update()
-						EndIf
-						   If RoverSytems_PerkToggle.GetValue() == 1
-						      (QuestRoverSystems as SISA_Rover).Update()
-						EndIf
-		                MiscObject IDidNotAskForThis = Game.GetFormFromFile(0x00000A15, "Starvival - Immersive Survival Addon.esm") as MiscObject 
-						PlayerRef.RemoveItem(IDidNotAskForThis, 999, True, None)
-						GlobalVariable DrinkAlcDetrimental01 = Game.GetFormFromFile(0x002D87DB, "Starfield.esm") as GlobalVariable 
-		                GlobalVariable DrinkAlcDetrimental02 = Game.GetFormFromFile(0x002D87DA, "Starfield.esm") as GlobalVariable 
-		                GlobalVariable DrinkAlcDetrimental03 = Game.GetFormFromFile(0x002D87D9, "Starfield.esm") as GlobalVariable 
-		                GlobalVariable DrinkAlcDetrimental04 = Game.GetFormFromFile(0x002D87D7, "Starfield.esm") as GlobalVariable 
-		                GlobalVariable DrinkAlcDetrimental05 = Game.GetFormFromFile(0x002D87D3, "Starfield.esm") as GlobalVariable 
-                        DrinkAlcDetrimental01.SetValue(5)
-                        DrinkAlcDetrimental02.SetValue(10)
-                        DrinkAlcDetrimental03.SetValue(15)
-                        DrinkAlcDetrimental04.SetValue(20)
-                        DrinkAlcDetrimental05.SetValue(25)
-				  EndIf	
-		   ElseIf fVersion < 11.971
-			      fVersion = 11.971
-				     If StartStarvival.GetValue() == 1   
-						   If GV_EquipmentDegradationToggle.GetValue() == 1
-						      (QuestDegradeSystems as SISA_RepairSystemQuest).Update()
-						EndIf
-				  EndIf
-		   ElseIf fVersion < 11.98
-			      fVersion = 11.98
-				     If StartStarvival.GetValue() == 1   
-						   If RoverSytems_PerkToggle.GetValue() == 1
-						      (QuestRoverSystems as SISA_Rover).Update()
-						EndIf
-						Utility.Wait(1.0)
-						PlayerRef.AddSpell(ThrowingDaggersSpell, False) 
-				  EndIf
-		   ElseIf fVersion < 11.99
-			      fVersion = 11.99
-				     If StartStarvival.GetValue() == 1   
-		                GlobalVariable GoodRepPresentsChance = Game.GetFormFromFile(0x0000107E, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-		                GlobalVariable GoodRepPresentsTime = Game.GetFormFromFile(0x0000107F, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-		                GlobalVariable DegradePershotHandgunSemi = Game.GetFormFromFile(0x000020AF, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-		                GlobalVariable DegradePershotRifleAuto = Game.GetFormFromFile(0x000020BB, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-		                GlobalVariable DegradePershotRifleSemi = Game.GetFormFromFile(0x000020BF, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-		                GlobalVariable DegradePershotShotgun = Game.GetFormFromFile(0x000020C3, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-                        GlobalVariable CrewMoraleBaseDMG = Game.GetFormFromFile(0x0000101A, "Starvival - Immersive Survival Addon.esm") as GlobalVariable
-		                GlobalVariable OxygenTerminalCooldown = Game.GetFormFromFile(0x000010B6, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-                        GlobalVariable BoostpackFuelTerminalCooldown = Game.GetFormFromFile(0x00000A9C, "Starvival - Immersive Survival Addon.esm") as GlobalVariable
-		                GlobalVariable FruitVeggieMinToxRestore = Game.GetFormFromFile(0x00001FA6, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
-                        GlobalVariable FruitVeggieMaxToxRestore = Game.GetFormFromFile(0x00001FA7, "Starvival - Immersive Survival Addon.esm") as GlobalVariable
-						
-						GoodRepPresentsChance.SetValue(15)
-                        GoodRepPresentsTime.SetValue(1800)
-                        DegradePershotHandgunSemi.SetValue(0.06)
-                        DegradePershotRifleAuto.SetValue(0.06)
-                        DegradePershotRifleSemi.SetValue(0.08)
-                        DegradePershotShotgun.SetValue(0.52)
-						CrewMoraleBaseDMG.SetValue(15)
-						OxygenTerminalCooldown.SetValue(30)   
-						BoostpackFuelTerminalCooldown.SetValue(30)
-						FruitVeggieMinToxRestore.SetValue(3)   
-						FruitVeggieMaxToxRestore.SetValue(5)
-
-						   If SurvivalToggler.GetValue() == 1
-						      (QuestBasicNeeds as SISA_BasicNeeds).Update()	
-						EndIf
-						   
-						   If GV_EquipmentDegradationToggle.GetValue() == 1		                
-						      
-							  Weapon IndustrialHammer = Game.GetFormFromFile(0x00002118, "Starvival - Immersive Survival Addon.esm") as Weapon 
-		                      Weapon ImpactDriver = Game.GetFormFromFile(0x00002112, "Starvival - Immersive Survival Addon.esm") as Weapon 
-		                      Weapon PipeWrench = Game.GetFormFromFile(0x00002117, "Starvival - Immersive Survival Addon.esm") as Weapon 
-		                      Weapon CompactRatchet = Game.GetFormFromFile(0x00002116, "Starvival - Immersive Survival Addon.esm") as Weapon 
-		                      Weapon HandheldWelder = Game.GetFormFromFile(0x000021F1, "Starvival - Immersive Survival Addon.esm") as Weapon 
-		                      Weapon Multitoolbox = Game.GetFormFromFile(0x000023BE, "Starvival - Immersive Survival Addon.esm") as Weapon 
-                        
-						          If PlayerRef.GetItemCount(IndustrialHammer) > 0
-						             PlayerRef.RemoveItem(IndustrialHammer, 9999, True, None)
-						             PlayerRef.AddItem(IndustrialHammer, 1, True)						
-					           EndIf	
-						          If PlayerRef.GetItemCount(ImpactDriver) > 0
-						             PlayerRef.RemoveItem(ImpactDriver, 9999, True, None)
-						             PlayerRef.AddItem(ImpactDriver, 1, True)						
-					           EndIf
-						          If PlayerRef.GetItemCount(PipeWrench) > 0
-						             PlayerRef.RemoveItem(PipeWrench, 9999, True, None)
-						             PlayerRef.AddItem(PipeWrench, 1, True)						
-					           EndIf						
-						          If PlayerRef.GetItemCount(CompactRatchet) > 0
-						             PlayerRef.RemoveItem(CompactRatchet, 9999, True, None)
-						             PlayerRef.AddItem(CompactRatchet, 1, True)						
-					           EndIf						
-						          If PlayerRef.GetItemCount(HandheldWelder) > 0
-						             PlayerRef.RemoveItem(HandheldWelder, 9999, True, None)
-						             PlayerRef.AddItem(HandheldWelder, 1, True)						
-					           EndIf							
-						          If PlayerRef.GetItemCount(Multitoolbox) <= 0
-						             PlayerRef.AddItem(Multitoolbox, 1, True)						
-					           EndIf						
-						EndIf
-				  EndIf	
-		   ElseIf fVersion < 12.1
+		       If fVersion < 12.1
 			      fVersion = 12.1
 				     If StartStarvival.GetValue() == 1   
 						   If GV_FameAndReputationToggle.GetValue() == 1
@@ -729,10 +464,34 @@ Function Patch()
 		                     (QuestEconomy as SISA_Economy).UpdateHotfix()						   
 						EndIf
 				  EndIf	
-		   ElseIf fVersion < 12.46
-			      fVersion = 12.46					 
+		   ElseIf fVersion < 12.48
+			      fVersion = 12.48					 
+				  
+				  GlobalVariable RepOnShipBuy = Game.GetFormFromFile(0x00001092, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
+				  GlobalVariable RepOnShipSell = Game.GetFormFromFile(0x00001091, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
+				  GlobalVariable RepOnFactionQuestRepeat = Game.GetFormFromFile(0x000024D8, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
+				  GlobalVariable RepOnMBFinishedBounty = Game.GetFormFromFile(0x00000DF9, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
+				  GlobalVariable RepOnMBFinishedOther = Game.GetFormFromFile(0x0000250A, "Starvival - Immersive Survival Addon.esm") as GlobalVariable 
+
+				  RepOnShipBuy.SetValue(1.5)					 
+				  RepOnShipSell.SetValue(0.5)
+				  RepOnFactionQuestRepeat.SetValue(0.6)
+				  RepOnMBFinishedBounty.SetValue(0.3)
+				  RepOnMBFinishedOther.SetValue(0.15)
+
 					 If StartStarvival.GetValue() == 1   
-						UpdateMessage.show(Version12, Version4, Version6)
+						   If GV_FameAndReputationToggle.GetValue() == 1
+						     (QuestFameAndRep as SISA_FameAndRepMB).UpdateHotfix()
+						EndIf
+				  EndIf			   
+		   ElseIf fVersion < 12.5
+			      fVersion = 12.5					 
+
+					 If StartStarvival.GetValue() == 1   
+						   If GV_FameAndReputationToggle.GetValue() == 1
+						     (QuestFameAndRep as SISA_FameAndRepMB).RecalculateReputation()
+						EndIf
+				        UpdateMessage.show(Version12, Version5, Version0)
 				  EndIf	
 			EndIf
 

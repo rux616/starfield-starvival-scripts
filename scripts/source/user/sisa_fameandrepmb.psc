@@ -103,7 +103,7 @@ Spell Property PositiveSpell Auto Const
 
 Perk Property ReputationPerk Auto Const
 Perk Property ReputationPerk_UC Auto Const
-Perk Property ReputationPerk_FC Auto Const
+Perk Property ReputationPerk_FCNew Auto Const
 Perk Property ReputationPerk_CF Auto Const
 Perk Property ReputationClearancePerk Auto Const
 
@@ -133,7 +133,7 @@ Function FameAndRepStart()
          PlayerRef.AddPerk(ReputationPerk, False)		 
          PlayerRef.AddPerk(ReputationClearancePerk, False)
          PlayerRef.AddPerk(ReputationPerk_UC, False)
-         PlayerRef.AddPerk(ReputationPerk_FC, False)
+         PlayerRef.AddPerk(ReputationPerk_FCNew, False)
          PlayerRef.AddPerk(ReputationPerk_CF, False)
          RegisterForMenuOpenCloseEvent("DataMenu")
 	     RegisterForActorValueChangedEvent(PlayerRef, Fame)
@@ -163,7 +163,7 @@ Function FameAndRepStop()
 
 		 PlayerRef.Removeperk(ReputationPerk) 
 		 PlayerRef.Removeperk(ReputationPerk_UC) 
-		 PlayerRef.Removeperk(ReputationPerk_FC) 
+		 PlayerRef.Removeperk(ReputationPerk_FCNew) 
 		 PlayerRef.Removeperk(ReputationPerk_CF)
 		 PlayerRef.Removeperk(ReputationClearancePerk)
          PlayerRef.RemoveSpell(FameSpellPerkPoints)
@@ -184,6 +184,29 @@ Function FameAndRepStop()
 
 EndFunction
 
+Function RecalculateReputation()
+
+		 PlayerRef.Removeperk(ReputationPerk) 
+		 PlayerRef.Removeperk(ReputationPerk_UC) 
+		 PlayerRef.Removeperk(ReputationPerk_FCNew) 
+		 PlayerRef.Removeperk(ReputationPerk_CF)
+         
+		 PlayerRef.RestoreValue(Reputation, 999)		         
+         PlayerRef.DamageValue(Reputation, 50)
+         PlayerRef.RestoreValue(AV_ReputationUC, 999)		         
+         PlayerRef.DamageValue(AV_ReputationUC, 50)
+         PlayerRef.RestoreValue(AV_ReputationFC, 999)		         
+         PlayerRef.DamageValue(AV_ReputationFC, 50)
+         PlayerRef.RestoreValue(AV_ReputationCF, 999)		         
+         PlayerRef.DamageValue(AV_ReputationCF, 50)
+
+         PlayerRef.AddPerk(ReputationPerk, False)		 
+         PlayerRef.AddPerk(ReputationPerk_UC, False)
+         PlayerRef.AddPerk(ReputationPerk_FCNew, False)
+         PlayerRef.AddPerk(ReputationPerk_CF, False)                
+
+EndFunction
+
 Function Update()		        
                   		 
 		 PlayerRef.RestoreValue(Reputation, 999)		         
@@ -197,7 +220,7 @@ Function Update()
 
 		 PlayerRef.Removeperk(ReputationPerk) 
 		 PlayerRef.Removeperk(ReputationPerk_UC) 
-		 PlayerRef.Removeperk(ReputationPerk_FC) 
+		 PlayerRef.Removeperk(ReputationPerk_FCNew) 
 		 PlayerRef.Removeperk(ReputationPerk_CF)
          PlayerRef.RemoveSpell(ReputationStatusMenuSpell)
          PlayerRef.RemoveSpell(IntimidationSpell)
@@ -215,7 +238,7 @@ Function Update()
 		 PlayerRef.AddSpell(ReputationStatusMenuSpell, False)
          PlayerRef.AddPerk(ReputationPerk, False)		 
          PlayerRef.AddPerk(ReputationPerk_UC, False)
-         PlayerRef.AddPerk(ReputationPerk_FC, False)
+         PlayerRef.AddPerk(ReputationPerk_FCNew, False)
          PlayerRef.AddPerk(ReputationPerk_CF, False)
          RegisterForMenuOpenCloseEvent("DataMenu")
 	     RegisterForActorValueChangedEvent(PlayerRef, Reputation)
@@ -224,6 +247,10 @@ Function Update()
 	     RegisterForActorValueChangedEvent(PlayerRef, AV_ReputationCF)
          PercentageTracker()
 
+EndFunction
+
+Function UpdateHotfix()		                          		 
+         PlayerRef.AddPerk(ReputationPerk_FCNew, False)
 EndFunction
 
 Event OnMenuOpenCloseEvent(String asMenuName, Bool abOpening)

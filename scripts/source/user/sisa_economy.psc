@@ -213,7 +213,8 @@ Function EconomyStop()
                   CancelTimerGameTime(2)
 				  EnableFastTravel()
                   EnableTakeoff()
-                  TaxTimerStarted = False
+                  SetServiceCostsToVanilla()
+				  TaxTimerStarted = False
 
 EndFunction
 
@@ -305,6 +306,39 @@ Function SetServiceCosts()
          SetCostSleepcrate.SetValue(15000)
          SetCostEnhance.SetValue(14000)
          SetCostWell.SetValue(90000)
+
+         Utility.Wait(1.0)
+         DialogueDoctorQuest.UpdateCurrentInstanceGlobal(SetCostDoctorAddictions)
+         DialogueDoctorQuest.UpdateCurrentInstanceGlobal(SetCostDoctorAffliction)
+		 DialogueDoctorQuest.UpdateCurrentInstanceGlobal(SetCostDoctorAll)
+		 DialogueDoctorQuest.UpdateCurrentInstanceGlobal(SetCostDoctorWounds)
+		 DialogueNewAtlantis.UpdateCurrentInstanceGlobal(SetCostEnhance)
+		 DialogueNewAtlantis.UpdateCurrentInstanceGlobal(SetCostWell)                                            
+		 DialogueCydonia.UpdateCurrentInstanceGlobal(SetCostEnhance)
+         DialogueAkila.UpdateCurrentInstanceGlobal(SetCostCore)
+         DialogueAkila.UpdateCurrentInstanceGlobal(SetCostMidtown)
+		 DialogueAkila.UpdateCurrentInstanceGlobal(SetCostEnhance)
+		 DialogueNeon.UpdateCurrentInstanceGlobal(SetCostTradeTower)
+         DialogueNeon.UpdateCurrentInstanceGlobal(SetCostSleepcrate)
+		 DialogueNeon.UpdateCurrentInstanceGlobal(SetCostEnhance)											
+		 DialogueParadiso.UpdateCurrentInstanceGlobal(SetCostEnhance)
+		 DialogueStarterHome.UpdateCurrentInstanceGlobal(SetCostTraitHome)  		 
+
+EndFunction
+
+Function SetServiceCostsToVanilla()
+
+		 SetCostCore.SetValue(78000) 
+         SetCostMidtown.SetValue(45000) 
+         SetCostTraitHome.SetValue(125000)
+         SetCostDoctorAll.SetValue(750)
+         SetCostDoctorAffliction.SetValue(500)
+         SetCostDoctorWounds.SetValue(400)
+         SetCostDoctorAddictions.SetValue(450)
+         SetCostTradeTower.SetValue(235000)
+         SetCostSleepcrate.SetValue(6500)
+         SetCostEnhance.SetValue(500)
+         SetCostWell.SetValue(30000)
 
          Utility.Wait(1.0)
          DialogueDoctorQuest.UpdateCurrentInstanceGlobal(SetCostDoctorAddictions)
@@ -828,6 +862,54 @@ Float Function ReputationCalculator()
 	  Float IfReputation100 = 1.50
       
 	  ActorValue AVCheck = CheckForAV() 
+	  
+	  If FameAndReputationToggle.GetValue() == 0
+         Return IfReputation50 	  
+   EndIf  
+      
+      If PlayerRef.GetValue(AVCheck) < 10
+         Return IfReputation00
+  ElseIf PlayerRef.GetValue(AVCheck) >= 10 && PlayerRef.GetValue(AVCheck) < 20
+         Return IfReputation10
+  ElseIf PlayerRef.GetValue(AVCheck) >= 20 && PlayerRef.GetValue(AVCheck) < 30
+         Return IfReputation20
+  ElseIf PlayerRef.GetValue(AVCheck) >= 30 && PlayerRef.GetValue(AVCheck) < 40
+         Return IfReputation30
+  ElseIf PlayerRef.GetValue(AVCheck) >= 40 && PlayerRef.GetValue(AVCheck) < 50
+         Return IfReputation40
+  ElseIf PlayerRef.GetValue(AVCheck) >= 50 && PlayerRef.GetValue(AVCheck) < 60
+         Return IfReputation50
+  ElseIf PlayerRef.GetValue(AVCheck) >= 60 && PlayerRef.GetValue(AVCheck) < 70
+         Return IfReputation60
+  ElseIf PlayerRef.GetValue(AVCheck) >= 70 && PlayerRef.GetValue(AVCheck) < 80
+         Return IfReputation70
+  ElseIf PlayerRef.GetValue(AVCheck) >= 80 && PlayerRef.GetValue(AVCheck) < 90
+         Return IfReputation80
+  ElseIf PlayerRef.GetValue(AVCheck) >= 90 && PlayerRef.GetValue(AVCheck) < 100
+         Return IfReputation90
+  ElseIf PlayerRef.GetValue(AVCheck) >= 100
+         Return IfReputation100
+   Else 
+         Return IfReputation50
+   EndIf
+
+EndFunction
+
+Float Function ReputationCalculatorForOutpostTax()
+	  
+	  Float IfReputation00 = 0.50 	   
+	  Float IfReputation10 = 0.60      
+	  Float IfReputation20 = 0.70
+	  Float IfReputation30 = 0.80      
+	  Float IfReputation40 = 0.90 
+	  Float IfReputation50 = 1.00
+	  Float IfReputation60 = 1.10      
+	  Float IfReputation70 = 1.20
+	  Float IfReputation80 = 1.30      
+	  Float IfReputation90 = 1.40 
+	  Float IfReputation100 = 1.50
+      
+	  ActorValue AVCheck = CheckForAVRep() 
 	  
 	  If FameAndReputationToggle.GetValue() == 0
          Return IfReputation50 	  

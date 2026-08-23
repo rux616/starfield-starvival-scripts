@@ -9479,12 +9479,16 @@ Function Main(Int MenuType = 0, Int Button = 0, Bool MenuOpened = True)
 	                                ElseIf (button == 5)
 
                                             GV_RepRanksMSGToggle.SetValue(1)
+
+	                                ElseIf (button == 6)
+
+                                            (StarvivalFameAndRepQuest as SISA_FameAndRepMB).RecalculateReputation()
                                                                                                                                                                          	                                									                             									
-									ElseIf (button == 6)                                            
+									ElseIf (button == 7)                                            
 	                                
 									        MenuType = 4007
 
-									ElseIf (button == 7)
+									ElseIf (button == 8)
 
                                            ; Exit
                                            MenuOpened = False

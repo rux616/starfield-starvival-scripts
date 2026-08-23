@@ -15,7 +15,6 @@ Message Property MSG_HazardWater Auto Const
 Float Property FLT_Timer = 1.0 Auto
 Float Property FLT_DMG = 1.0 Auto
 Float Property FLT_InWaterAmount = 1.0 Auto
-Float Property FLT_DMGSpacesuit = 1.0 Auto
 
 Event OnEffectStart(ObjectReference akTarget, Actor akCaster, MagicEffect akBaseEffect, Float afMagnitude, Float afDuration)
       Float FinalTime = FLT_Timer * GV_GlobalTimeMult.GetValue()
@@ -49,7 +48,7 @@ Event OnTimer(int aiTimerID)
 			 EndIf
 								
 				If PlayerRef.WornHasKeyword(KWD_WornSpacesuit)
-				   Float HygieneDMGWithSpacesuit = FLT_DMG * GlobalDMGMult * FLT_DMGSpacesuit * SpacesuitDMGMult
+				   Float HygieneDMGWithSpacesuit = FLT_DMG * GlobalDMGMult * SpacesuitDMGMult
 				   PlayerRef.DamageValue(AV_Hygiene, HygieneDMGWithSpacesuit)   
 		     Else
 				   Float HygieneDMG = FLT_DMG * GlobalDMGMult

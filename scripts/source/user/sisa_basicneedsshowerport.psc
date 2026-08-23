@@ -51,8 +51,8 @@ Armor StorePlayerClothing35
 Armor StorePlayerClothing37
 
 Float Property FLT_ProcessTime = 30.0 Auto
-Float Property FLT_ProcessTimeQuick = 5.0 Auto
-Float Property MaxActivationDistance = 1.4 Auto
+Float Property FLT_ProcessTimeQuick = 10.0 Auto
+Float Property MaxActivationDistance = 1.5 Auto
 
 Int ShowerSoundInstance = -1
 
@@ -135,12 +135,12 @@ Event OnTimer(int aiTimerID)
 				   StartTimer(Timer, 1)
 		     EndIf
 
-		 ElseIf (aiTimerID == 2) 
-                If bIsEnabled == True
-				   Float Timer = Utility.RandomFloat(0.15, 0.3)
-                   VFX_Water.Play(PlayerRef, 0.3)
-				   StartTimer(Timer, 2)
-			 EndIf
+		 ;ElseIf (aiTimerID == 2) 
+                ;If bIsEnabled == True
+				   ;Float Timer = Utility.RandomFloat(0.15, 0.3)
+                   ;VFX_Water.Play(PlayerRef, -1)
+				   ;StartTimer(Timer, 2)
+			 ;EndIf
 		  EndIf
 EndEvent
 
@@ -292,10 +292,11 @@ Function StartFX()
          ShowerSoundInstance = SFX_Showering.Play(PlayerRef, None, None)     
             If GV_ShowerVFX.GetValue() == 1
 		       FX_Wetness.Play(PlayerRef, -1)
+               VFX_Water.Play(PlayerRef, -1)
                IMAD_Blur.Apply(0.5)
                StartTimer(0, 0)
                StartTimer(15, 1)
-               StartTimer(0, 2)
+               ;StartTimer(0, 2)
          EndIf
          Idles()
 EndFunction
@@ -305,6 +306,8 @@ Function StopShower()
 		       CancelTimer(0)
                CancelTimer(1)
                FX_Wetness.Stop(PlayerRef)
+		       FX_Wetness.Play(PlayerRef, 5.0)
+               VFX_Water.Stop(PlayerRef)
                IMAD_Blur.Remove()	
                IMAD_Blink.Remove()
          EndIf

@@ -20,7 +20,7 @@ Function OutpostPaymentMenu(Int MenuType = 0, Int Button = 0, Bool MenuOpened = 
 
  ElseIf MenuType == 0
            
-		   Float ReputationCalc = (Quest_Economy as SISA_Economy).ReputationCalculator()
+		   Float ReputationCalc = (Quest_Economy as SISA_Economy).ReputationCalculatorForOutpostTax()
            Float Discount = (Quest_Economy as SISA_Economy).ServiceDiscountCost()
 		   Float DebtCounter = GV_DebtCounter.Getvalue()	       
            Float OutpostCount = GV_OutpostCount.Getvalue()

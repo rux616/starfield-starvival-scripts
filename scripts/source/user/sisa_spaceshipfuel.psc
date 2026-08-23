@@ -424,6 +424,8 @@ EndGroup
 Group SISAVisualFX
     VisualEffect Property GravJumpOutroFX Auto Const Mandatory
     VisualEffect Property SpaceshipGravDriveStartFX Auto Const mandatory
+    VisualEffect Property SpaceshipGravDriveStartFX02 Auto Const mandatory
+    VisualEffect Property SpaceshipGravDriveStartFX03 Auto Const mandatory
     VisualEffect Property SpaceshipMaintenanceFX Auto Const mandatory
     VisualEffect Property ShipOnFire Auto Const mandatory
 EndGroup
@@ -994,6 +996,7 @@ Event ReferenceAlias.OnShipGravJump(ReferenceAlias akSender, Location aDestinati
 				akShip.setvalue(SpaceshipGravDriveInitiated, -1)
 	               If GV_SpaceshipDramaticGravJumpToggle.GetValue() == 1
 		              SpaceshipGravDriveStartFX.Stop(akShip)
+		              SpaceshipGravDriveStartFX02.Stop(akShip)
 	            EndIf
 		Else		   
 				   If GravJumpInitiated == False
@@ -1012,6 +1015,7 @@ Event ReferenceAlias.OnShipGravJump(ReferenceAlias akSender, Location aDestinati
 			          If akShip.IsInSpace() == True
 						   If GV_SpaceshipDramaticGravJumpToggle.GetValue() == 1
 						      SpaceshipGravDriveStartFX.Play(akShip, -1, None)
+						      SpaceshipGravDriveStartFX02.Play(akShip, -1, None)
                         EndIf
 				   EndIf
 			    EndIf					
@@ -1039,8 +1043,10 @@ Event ReferenceAlias.OnShipGravJump(ReferenceAlias akSender, Location aDestinati
                GravDrivePrepareSoundInstance = -1
 		       CancelTimer(15)	
 	           If GV_SpaceshipDramaticGravJumpToggle.GetValue() == 1
+		          SpaceshipGravDriveStartFX02.Stop(akShip)
 		          Utility.Wait(5.0)
 		          SpaceshipGravDriveStartFX.Stop(akShip)
+		          ;SpaceshipGravDriveStartFX02.Stop(akShip)
 			EndIf
 	 
 	 EndIf	
@@ -1070,7 +1076,8 @@ Event ReferenceAlias.OnShipGravJump(ReferenceAlias akSender, Location aDestinati
 		                				        
 						If akShip.IsInSpace() == True  
                               If GV_SpaceshipDramaticGravJumpToggle.GetValue() == 1
-						         GravJumpOutroFX.Play(akShip, 2.3, None)
+						         SpaceshipGravDriveStartFX03.Play(akShip, 2.3, None)
+								 GravJumpOutroFX.Play(akShip, 2.3, None)
 					             ; or GravJumpOutroFX.Play(akShip, 2.5, None)
 						   EndIf
 					 EndIf			
@@ -3786,6 +3793,7 @@ Function GravDriveAbort()
     SpaceShipReference akShip = SQ_PlayerShip.PlayerShip.GetShipRef()
 
 	SpaceshipGravDriveStartFX.Stop(akShip)
+	SpaceshipGravDriveStartFX02.Stop(akShip)
 	akShip.setvalue(SpaceshipGravDriveInitiated, -1)
 	wwiseevent.StopInstance(GravDrivePrepareSoundInstance)
     GravDrivePrepareSoundInstance = -1
