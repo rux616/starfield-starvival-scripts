@@ -86,6 +86,7 @@ ObjectReference Property ObjREF_MyCampMarker Auto Const
 ObjectReference Property ObjREF_TrackerTrigger Auto Const
 Quest Property QST_MyCampLocation Auto
 Hazard Property HZRD_CampGeneratorENVShield Auto Const
+Conditionform Property CFRoverSystemsRank3Specific Auto Const Mandatory
 
 ObjectReference currentVehicle
 ObjectReference Camp
@@ -402,6 +403,15 @@ Function Deployment()
  EndIf
 EndFunction
 
+Float Function RoverWeightForShipCargo()     
+	    Float RoverDecreasedWeight = 2.0
+	    If CFRoverSystemsRank3Specific.IsTrue(PlayerRef, None) 
+           Return RoverDecreasedWeight 
+     Else	
+           Return 1.0
+     EndIf
+EndFunction
+
 Function DeployOrHideFull()
 
 				 spaceshipreference ActiveShip = SQ_PlayerShip.PlayerShip.GetShipRef()			     
@@ -413,7 +423,8 @@ Function DeployOrHideFull()
 			 ElseIf ActiveShip.GetValue(AV_VehicleStorage) >= 1
 			           Float CheckForPayloads = CheckCrewForPayloads()	
                        Float Limit = ActiveShip.GetShipMaxCargoWeight() * CheckForPayloads - ActiveShip.GetWeightInContainer()
-					   Float CargoLimit = GV_CargoLimit.GetValue()
+					   Float RoverWeightForCargo = RoverWeightForShipCargo()					   
+					   Float CargoLimit = GV_CargoLimit.GetValue() / RoverWeightForCargo 
 					   If ActiveShip.GetWeightInContainer() > ActiveShip.GetShipMaxCargoWeight() * CheckForPayloads
 					         If !IsLocationSettled(PlayerRef.GetCurrentLocation())
 						        MSG_SpawnAbortNotEnoughSpace.Show()
@@ -436,7 +447,8 @@ Function DeployOrHideCargoLimit()
 			spaceshipreference ActiveShip = SQ_PlayerShip.PlayerShip.GetShipRef()			     
 			Float CheckForPayloads = CheckCrewForPayloads()	
             Float Limit = ActiveShip.GetShipMaxCargoWeight() * CheckForPayloads - ActiveShip.GetWeightInContainer()
-			Float CargoLimit = GV_CargoLimit.GetValue()
+		    Float RoverWeightForCargo = RoverWeightForShipCargo()
+			Float CargoLimit = GV_CargoLimit.GetValue() / RoverWeightForCargo
 				If ActiveShip.GetWeightInContainer() > ActiveShip.GetShipMaxCargoWeight() * CheckForPayloads
 					  If !IsLocationSettled(PlayerRef.GetCurrentLocation())
 						 MSG_SpawnAbortNotEnoughSpace.Show()
@@ -761,7 +773,6 @@ Function ActivateENVShielding(ObjectReference TargetRef)
 	        RegisterForDistanceGreaterThanEvent(CampGenerator, PlayerRef, 20)
             
 			GV_ENVShieldIsAtWork.SetValue(1)
-            ;CampGeneratorENVShield = TargetRef.Placeatme(HZRD_CampGeneratorENVShield, 1, False, false, true, None, none, False)
             MyLinkedRefENVShield.EnableNoWait()
             MyLinkedRefENVShieldPostVolume.EnableNoWait()
 	        MyLinkedRefENVShieldSoundTrigger.EnableNoWait()
@@ -777,7 +788,6 @@ Function DisableENVShielding(ObjectReference TargetRef)
 			UnregisterForDistanceEvents(PlayerRef, CampGenerator) 
             GV_ENVShieldDistanceThreshold.SetValue(0)
 			GV_ENVShieldIsAtWork.SetValue(0)
-            ;CampGeneratorENVShield.Delete()
             MyLinkedRefENVShield.DisableNoWait()
             MyLinkedRefENVShieldPostVolume.DisableNoWait()
 	        MyLinkedRefENVShieldSoundTrigger.DisableNoWait()

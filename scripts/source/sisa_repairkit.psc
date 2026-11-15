@@ -8,6 +8,7 @@ Message Property MSG_WeaponRepairMenu Auto Const
 Message Property MSG_SpacesuitRepairMenu Auto Const
 Message Property MSG_BoostpackRepairMenu Auto Const
 Message Property MSG_ToolRepairMenu Auto Const
+Message Property MSG_CritSuccess Auto Const
 MagicEffect Property MAGEF_RepairKitWeapon Auto Const
 MagicEffect Property MAGEF_RepairKitSpacesuit Auto Const
 MagicEffect Property MAGEF_RepairKitBoostpack Auto Const
@@ -18,6 +19,7 @@ wwiseevent Property SFX_Repair Auto Const
 Conditionform Property CF_RepairBonus01 Auto Const Mandatory
 Conditionform Property CF_RepairBonus02 Auto Const Mandatory
 Conditionform Property CF_RepairBonus03 Auto Const Mandatory
+Conditionform Property CF_RepairBonus03Specific Auto Const Mandatory
 Conditionform Property CF_RepairBonus04 Auto Const Mandatory
 GlobalVariable Property GV_RepairKitThresholdMin Auto Const
 GlobalVariable Property GV_RepairKitThresholdMax Auto Const
@@ -220,7 +222,7 @@ Function Repair(ActorValue AV, Message MSGFail, Message MSGCond, Wwiseevent SFX)
 		 
 		 If PlayerRef.GetValue(AV) < ThresholdMin
 	        PlayerRef.AddItem(POTI_RepairKit, 1, True)
-			MSGFail.Show(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)			   
+			MSGFail.Show()			   
 	 ElseIf PlayerRef.GetValue(AV) < ThresholdMax
 	        PlayerRef.RestoreValue(AV, RestoreBase + BonusRepairAmount + BonusFromMod)	          			
 		    GV_SFXBegin.SetValue(1)
@@ -228,11 +230,18 @@ Function Repair(ActorValue AV, Message MSGFail, Message MSGCond, Wwiseevent SFX)
 	              PlayerRef.RestoreValue(AV, 999)
 	              PlayerRef.DamageValue(AV, 100 - ThresholdMax)
 	        EndIf
+               If CF_RepairBonus03Specific.IsTrue(PlayerRef, None) 
+			      Int FullRepairChance = Utility.RandomInt(1, 100)
+			         If FullRepairChance <= 5
+			            PlayerRef.RestoreValue(AV, 999)
+			            MSG_CritSuccess.Show()
+				  EndIf
+			EndIf
 			PlayerRef.EquipItem(POTI_RepairToken, False, True)
-			MSGCond.Show(PlayerRef.GetValue(AV), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+			MSGCond.Show(PlayerRef.GetValue(AV))
 	   Else
 	        PlayerRef.AddItem(POTI_RepairKit, 1, True)
-			MSGFail.Show(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)			   
+			MSGFail.Show()			   
 	  EndIf
 
 EndFunction

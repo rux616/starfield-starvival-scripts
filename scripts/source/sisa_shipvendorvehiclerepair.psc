@@ -10,6 +10,10 @@ Conditionform Property ConditionFormFuelDiscount01 Auto Const Mandatory
 Conditionform Property ConditionFormFuelDiscount02 Auto Const Mandatory
 Conditionform Property ConditionFormFuelDiscount03 Auto Const Mandatory
 Conditionform Property ConditionFormFuelDiscount04 Auto Const Mandatory
+Conditionform Property ConditionFormRoverSystems01 Auto Const Mandatory
+Conditionform Property ConditionFormRoverSystems02 Auto Const Mandatory
+Conditionform Property ConditionFormRoverSystems03 Auto Const Mandatory
+Conditionform Property ConditionFormRoverSystems04 Auto Const Mandatory
 Weapon Property MiscObj_RoverMaintenanceKit Auto Const
 MiscObject Property MiscObj_Credits Auto Const
 Potion Property Pot_AdditionalTriggers Auto Const
@@ -26,7 +30,8 @@ Function RepairMenu(Int MenuType = 0, Int Button = 0)
 		 If Button == -1		 
      
 	 ElseIf MenuType == 0
-            
+			
+			Float RoverSystemsDiscount = RoverSystemsDiscountCost()	            
 			Float RepBonus = RepCalculator() 			
 			Float DiscountCalculate = DiscountCost() 	      
 	        Float MaintenanceCostPerUnit = MiscObj_RoverMaintenanceKit.GetGoldValue() / 14 * GV_RoverRepairPriceMult.GetValue()
@@ -34,7 +39,7 @@ Function RepairMenu(Int MenuType = 0, Int Button = 0)
             Float FinalCost = 0.0					  
 			
 			RepairAmount = PlayerRef.GetBaseValue(AV_RoverMaintenance) - PlayerRef.GetValue(AV_RoverMaintenance)   
-	        FinalCost = Math.Round(RepairAmount * MaintenanceCostPerUnit / DiscountCalculate / RepBonus) as Float
+	        FinalCost = Math.Round(RepairAmount * MaintenanceCostPerUnit / DiscountCalculate / RepBonus / RoverSystemsDiscount) as Float
 		    			
 			Button = MSG_RepairShipServiceMenu.Show(PlayerRef.GetValue(AV_RoverMaintenance), PlayerRef.GetBaseValue(AV_RoverMaintenance), FinalCost, 0, 0, 0, 0, 0, 0)	 
                    
@@ -128,6 +133,28 @@ Float Function DiscountCost()
 	ElseIf ConditionFormFuelDiscount02.IsTrue(PlayerRef, None)	 
            Return DiscountPercent02
 	ElseIf ConditionFormFuelDiscount01.IsTrue(PlayerRef, None)
+           Return DiscountPercent01 
+Else	
+           Return DiscountPercent00
+     EndIf
+
+EndFunction
+
+Float Function RoverSystemsDiscountCost()
+     
+	 Float DiscountPercent00 = 1.00
+     Float DiscountPercent01 = 1.10 	 
+     Float DiscountPercent02 = 1.15 
+     Float DiscountPercent03 = 1.20 
+     Float DiscountPercent04 = 1.30 	 
+		
+		If ConditionFormRoverSystems04.IsTrue(PlayerRef, None)     
+		   Return DiscountPercent04 
+	ElseIf ConditionFormRoverSystems03.IsTrue(PlayerRef, None)  
+	       Return DiscountPercent03
+	ElseIf ConditionFormRoverSystems02.IsTrue(PlayerRef, None)	 
+           Return DiscountPercent02
+	ElseIf ConditionFormRoverSystems01.IsTrue(PlayerRef, None)
            Return DiscountPercent01 
 Else	
            Return DiscountPercent00

@@ -4,14 +4,28 @@ Quest Property QuestFameAndRep Auto Const
 Actor Property PlayerRef Auto Const
 ActorValue Property AV_BoostpackFuel Auto Const
 ActorValue Property AV_DegradeHandgunSemi Auto Const
+ActorValue Property AV_DegradeHandgunSemiLaser Auto Const
+ActorValue Property AV_DegradeHandgunSemiParticle Auto Const
 ActorValue Property AV_DegradeHandgunAuto Auto Const
+ActorValue Property AV_DegradeHandgunAutoLaser Auto Const
+ActorValue Property AV_DegradeHandgunAutoParticle Auto Const
 ActorValue Property AV_DegradeRifleSemi Auto Const
+ActorValue Property AV_DegradeRifleSemiLaser Auto Const
+ActorValue Property AV_DegradeRifleSemiParticle Auto Const
 ActorValue Property AV_DegradeRifleAuto Auto Const
+ActorValue Property AV_DegradeRifleAutoLaser Auto Const
+ActorValue Property AV_DegradeRifleAutoParticle Auto Const
+ActorValue Property AV_DegradeRifleEM Auto Const
 ActorValue Property AV_DegradeShotgun Auto Const
+ActorValue Property AV_DegradeShotgunParticle Auto Const
 ActorValue Property AV_DegradeMelee Auto Const
 ActorValue Property AV_DegradeHeavy Auto Const
+ActorValue Property AV_DegradeHeavyParticle Auto Const
 ActorValue Property AV_DegradeLauncher Auto Const
+ActorValue Property AV_DegradeLauncherParticle Auto Const
 ActorValue Property AV_DegradeSniper Auto Const
+ActorValue Property AV_DegradeSniperLaser Auto Const
+ActorValue Property AV_DegradeSniperParticle Auto Const
 ActorValue Property AV_DegradeTool Auto Const
 ActorValue Property AV_DegradeSuit Auto Const
 ActorValue Property AV_DegradeBoostpack Auto Const
@@ -20,15 +34,29 @@ GlobalVariable Property GV_DebuffTokenSuit Auto Const
 GlobalVariable Property GV_DebuffTokenBoostpack Auto Const
 GlobalVariable Property GV_DebuffTokenHelmet Auto Const
 GlobalVariable Property GV_DebuffTokenHandgunSemi Auto Const
+GlobalVariable Property GV_DebuffTokenHandgunSemiLaser Auto Const
+GlobalVariable Property GV_DebuffTokenHandgunSemiParticle Auto Const
 GlobalVariable Property GV_DebuffTokenHandgunAuto Auto Const
+GlobalVariable Property GV_DebuffTokenHandgunAutoLaser Auto Const
+GlobalVariable Property GV_DebuffTokenHandgunAutoParticle Auto Const
 GlobalVariable Property GV_DebuffTokenExplosive Auto Const
+GlobalVariable Property GV_DebuffTokenExplosiveParticle Auto Const
 GlobalVariable Property GV_DebuffTokenHeavy Auto Const
+GlobalVariable Property GV_DebuffTokenHeavyParticle Auto Const
 GlobalVariable Property GV_DebuffTokenTool Auto Const
 GlobalVariable Property GV_DebuffTokenMelee Auto Const
 GlobalVariable Property GV_DebuffTokenRifleSemi Auto Const
+GlobalVariable Property GV_DebuffTokenRifleSemiLaser Auto Const
+GlobalVariable Property GV_DebuffTokenRifleSemiParticle Auto Const
 GlobalVariable Property GV_DebuffTokenRifleAuto Auto Const
+GlobalVariable Property GV_DebuffTokenRifleAutoLaser Auto Const
+GlobalVariable Property GV_DebuffTokenRifleAutoParticle Auto Const
+GlobalVariable Property GV_DebuffTokenRifleEM Auto Const
 GlobalVariable Property GV_DebuffTokenShotguns Auto Const
+GlobalVariable Property GV_DebuffTokenShotgunsParticle Auto Const
 GlobalVariable Property GV_DebuffTokenSniper Auto Const
+GlobalVariable Property GV_DebuffTokenSniperLaser Auto Const
+GlobalVariable Property GV_DebuffTokenSniperParticle Auto Const
 GlobalVariable Property GV_BoostpackNeedsFuelToggle Auto Const
 GlobalVariable Property GV_BlockJetPack Auto Const
 GlobalVariable Property GV_PriceMultWeapon Auto Const
@@ -38,14 +66,28 @@ Message Property MSG_RepairVendorMenu Auto Const
 Message Property MSG_RepairVendorMenuWeapons Auto Const
 Message Property MSG_RepairVendorMenuTools Auto Const
 Message Property MSG_RepairVendorMenuWeaponsHandgunAuto Auto Const
+Message Property MSG_RepairVendorMenuWeaponsHandgunAutoLaser Auto Const
+Message Property MSG_RepairVendorMenuWeaponsHandgunAutoParticle Auto Const
 Message Property MSG_RepairVendorMenuWeaponsHandgunSemi Auto Const
+Message Property MSG_RepairVendorMenuWeaponsHandgunSemiLaser Auto Const
+Message Property MSG_RepairVendorMenuWeaponsHandgunSemiParticle Auto Const
 Message Property MSG_RepairVendorMenuWeaponsLaunchers Auto Const
+Message Property MSG_RepairVendorMenuWeaponsLaunchersParticle Auto Const
 Message Property MSG_RepairVendorMenuWeaponsMelee Auto Const
 Message Property MSG_RepairVendorMenuWeaponsMiniguns Auto Const
+Message Property MSG_RepairVendorMenuWeaponsMinigunsParticle Auto Const
 Message Property MSG_RepairVendorMenuWeaponsRiflesAuto Auto Const
+Message Property MSG_RepairVendorMenuWeaponsRiflesAutoLaser Auto Const
+Message Property MSG_RepairVendorMenuWeaponsRiflesAutoParticle Auto Const
 Message Property MSG_RepairVendorMenuWeaponsRiflesSemi Auto Const
+Message Property MSG_RepairVendorMenuWeaponsRiflesSemiLaser Auto Const
+Message Property MSG_RepairVendorMenuWeaponsRiflesSemiParticle Auto Const
+Message Property MSG_RepairVendorMenuWeaponsRiflesEM Auto Const
 Message Property MSG_RepairVendorMenuWeaponsShotguns Auto Const
+Message Property MSG_RepairVendorMenuWeaponsShotgunsParticle Auto Const
 Message Property MSG_RepairVendorMenuWeaponsSniper Auto Const
+Message Property MSG_RepairVendorMenuWeaponsSniperLaser Auto Const
+Message Property MSG_RepairVendorMenuWeaponsSniperParticle Auto Const
 Message Property MSG_RepairVendorMenuApparel Auto Const
 Message Property MSG_RepairVendorMenuApparelHelmet Auto Const
 Message Property MSG_RepairVendorMenuApparelBoostpack Auto Const
@@ -270,19 +312,8 @@ Function RepairEquipment(Int MenuType = 0, Int Button = 0, Bool MenuOpened = Tru
 				MenuOpened = False									                                                                            									
 		  EndIf
  
- ElseIf MenuType == 5
-           
-		   Float HandgunAutoAV = PlayerRef.Getvalue(AV_DegradeHandgunAuto)
-           Float HandgunSemiAV = PlayerRef.Getvalue(AV_DegradeHandgunSemi)
-           Float LauncherAV = PlayerRef.Getvalue(AV_DegradeLauncher)	
-           Float MeleeAV = PlayerRef.Getvalue(AV_DegradeMelee)	
-           Float MinigunAV = PlayerRef.Getvalue(AV_DegradeHeavy)			   
-		   Float RifleAutoAV = PlayerRef.Getvalue(AV_DegradeRifleAuto)
-           Float RifleSemiAV = PlayerRef.Getvalue(AV_DegradeRifleSemi)		   
-		   Float ShotgunAV = PlayerRef.Getvalue(AV_DegradeShotgun)
-           Float SniperAV = PlayerRef.Getvalue(AV_DegradeSniper)	
-		   
-		   button = MSG_RepairVendorMenuWeapons.show(HandgunAutoAV, HandgunSemiAV, LauncherAV, MeleeAV, MinigunAV, RifleAutoAV, RifleSemiAV, ShotgunAV, SniperAV)	
+ ElseIf MenuType == 5		   
+		button = MSG_RepairVendorMenuWeapons.show()	
 	                                    
 										If (button == 0)
                                            MenuType = 6																		
@@ -303,8 +334,36 @@ Function RepairEquipment(Int MenuType = 0, Int Button = 0, Bool MenuOpened = Tru
 									ElseIf (button == 8)                                           
                                            MenuType = 14
 									ElseIf (button == 9)                                           
+                                           MenuType = 15
+									ElseIf (button == 10)                                           
+                                           MenuType = 16
+									ElseIf (button == 11)                                           
+                                           MenuType = 17
+									ElseIf (button == 12)                                           
+                                           MenuType = 18
+									ElseIf (button == 13)                                           
+                                           MenuType = 19
+									ElseIf (button == 14)                                           
+                                           MenuType = 20
+									ElseIf (button == 15)                                           
+                                           MenuType = 21
+									ElseIf (button == 16)                                           
+                                           MenuType = 22
+									ElseIf (button == 17)                                           
+                                           MenuType = 23
+									ElseIf (button == 18)                                           
+                                           MenuType = 24
+									ElseIf (button == 19)                                           
+                                           MenuType = 25
+									ElseIf (button == 20)                                           
+                                           MenuType = 26
+									ElseIf (button == 21)                                           
+                                           MenuType = 27
+									ElseIf (button == 22)                                           
+                                           MenuType = 28
+									ElseIf (button == 23)                                           
                                            MenuType = 0
-									ElseIf (button == 10)
+									ElseIf (button == 24)
 										   ; Exit                                           
 										   MenuOpened = False									                                                                            									
 									 EndIf
@@ -329,6 +388,42 @@ Function RepairEquipment(Int MenuType = 0, Int Button = 0, Bool MenuOpened = Tru
 
  ElseIf MenuType == 7
 		   
+		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeHandgunAutoLaser)  
+		   Float PriceMult = GV_PriceMultWeapon.GetValue()
+		   Float RepBonus = ReputationCalculator()
+		   Float Cost = CalculateCost(200.0, 850.0, AV_DegradeHandgunAutoLaser, PriceMult, RepBonus)		 		             
+		   Int CredAmount = PlayerRef.GetItemCount(Credits)
+		   button = MSG_RepairVendorMenuWeaponsHandgunAutoLaser.show(CurrentAV, CredAmount, Cost)
+		     
+			 If (button == 0)
+                RepairVendorMenu(GV_DebuffTokenHandgunAutoLaser, None, AV_DegradeHandgunAutoLaser, Cost)																		
+		 ElseIf (button == 1)									
+                MenuType = 5																		                                   
+	     ElseIf (button == 2)                                           
+				; Exit                                           
+				MenuOpened = False									                                                                            									
+		  EndIf
+
+ ElseIf MenuType == 8
+		   
+		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeHandgunAutoParticle)  
+		   Float PriceMult = GV_PriceMultWeapon.GetValue()
+		   Float RepBonus = ReputationCalculator()
+		   Float Cost = CalculateCost(300.0, 950.0, AV_DegradeHandgunAutoParticle, PriceMult, RepBonus)		 		             
+		   Int CredAmount = PlayerRef.GetItemCount(Credits)
+		   button = MSG_RepairVendorMenuWeaponsHandgunAutoParticle.show(CurrentAV, CredAmount, Cost)
+		     
+			 If (button == 0)
+                RepairVendorMenu(GV_DebuffTokenHandgunAutoParticle, None, AV_DegradeHandgunAutoParticle, Cost)																		
+		 ElseIf (button == 1)									
+                MenuType = 5																		                                   
+	     ElseIf (button == 2)                                           
+				; Exit                                           
+				MenuOpened = False									                                                                            									
+		  EndIf
+
+ ElseIf MenuType == 9 
+		   
 		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeHandgunSemi)  
 		   Float PriceMult = GV_PriceMultWeapon.GetValue()
 		   Float RepBonus = ReputationCalculator()
@@ -345,17 +440,17 @@ Function RepairEquipment(Int MenuType = 0, Int Button = 0, Bool MenuOpened = Tru
 				MenuOpened = False									                                                                            									
 		  EndIf
 
- ElseIf MenuType == 8
+ ElseIf MenuType == 10 
 		   
-		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeLauncher)  
+		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeHandgunSemiLaser)  
 		   Float PriceMult = GV_PriceMultWeapon.GetValue()
 		   Float RepBonus = ReputationCalculator()
-		   Float Cost = CalculateCost(225.0, 2700.0, AV_DegradeLauncher, PriceMult, RepBonus)		 		             
+		   Float Cost = CalculateCost(175.0, 600.0, AV_DegradeHandgunSemiLaser, PriceMult, RepBonus)		 		             
 		   Int CredAmount = PlayerRef.GetItemCount(Credits)
-		   button = MSG_RepairVendorMenuWeaponsLaunchers.show(CurrentAV, CredAmount, Cost)
+		   button = MSG_RepairVendorMenuWeaponsHandgunSemiLaser.show(CurrentAV, CredAmount, Cost)
 		     
 			 If (button == 0)
-                RepairVendorMenu(GV_DebuffTokenExplosive, None, AV_DegradeLauncher, Cost)																		
+                RepairVendorMenu(GV_DebuffTokenHandgunSemiLaser, None, AV_DegradeHandgunSemiLaser, Cost)																		
 		 ElseIf (button == 1)									
                 MenuType = 5																		                                   
 	     ElseIf (button == 2)                                           
@@ -363,17 +458,17 @@ Function RepairEquipment(Int MenuType = 0, Int Button = 0, Bool MenuOpened = Tru
 				MenuOpened = False									                                                                            									
 		  EndIf
 
- ElseIf MenuType == 9
+ ElseIf MenuType == 11 
 		   
-		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeMelee)  
+		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeHandgunSemiParticle)  
 		   Float PriceMult = GV_PriceMultWeapon.GetValue()
 		   Float RepBonus = ReputationCalculator()
-		   Float Cost = CalculateCost(50.0, 200.0, AV_DegradeMelee, PriceMult, RepBonus)		 		             
+		   Float Cost = CalculateCost(275.0, 700.0, AV_DegradeHandgunSemiParticle, PriceMult, RepBonus)		 		             
 		   Int CredAmount = PlayerRef.GetItemCount(Credits)
-		   button = MSG_RepairVendorMenuWeaponsMelee.show(CurrentAV, CredAmount, Cost)
+		   button = MSG_RepairVendorMenuWeaponsHandgunSemiParticle.show(CurrentAV, CredAmount, Cost)
 		     
 			 If (button == 0)
-                RepairVendorMenu(GV_DebuffTokenMelee, None, AV_DegradeMelee, Cost)																		
+                RepairVendorMenu(GV_DebuffTokenHandgunSemiParticle, None, AV_DegradeHandgunSemiParticle, Cost)																		
 		 ElseIf (button == 1)									
                 MenuType = 5																		                                   
 	     ElseIf (button == 2)                                           
@@ -381,25 +476,7 @@ Function RepairEquipment(Int MenuType = 0, Int Button = 0, Bool MenuOpened = Tru
 				MenuOpened = False									                                                                            									
 		  EndIf
 
- ElseIf MenuType == 10
-
-		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeHeavy) 
-		   Float PriceMult = GV_PriceMultWeapon.GetValue()
-		   Float RepBonus = ReputationCalculator()
-		   Float Cost = CalculateCost(200.0, 2300.0, AV_DegradeHeavy, PriceMult, RepBonus)		 		             
-		   Int CredAmount = PlayerRef.GetItemCount(Credits)
-		   button = MSG_RepairVendorMenuWeaponsMiniguns.show(CurrentAV, CredAmount, Cost)
-		     
-			 If (button == 0)
-                RepairVendorMenu(GV_DebuffTokenHeavy, None, AV_DegradeHeavy, Cost)																		
-		 ElseIf (button == 1)									
-                MenuType = 5																		                                   
-	     ElseIf (button == 2)                                           
-				; Exit                                           
-				MenuOpened = False									                                                                            									
-		  EndIf
-
- ElseIf MenuType == 11
+ ElseIf MenuType == 12
 		   
 		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeRifleAuto) 
 		   Float PriceMult = GV_PriceMultWeapon.GetValue()
@@ -417,7 +494,43 @@ Function RepairEquipment(Int MenuType = 0, Int Button = 0, Bool MenuOpened = Tru
 				MenuOpened = False									                                                                            									
 		  EndIf
 
- ElseIf MenuType == 12
+ ElseIf MenuType == 13
+		   
+		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeRifleAutoLaser) 
+		   Float PriceMult = GV_PriceMultWeapon.GetValue()
+		   Float RepBonus = ReputationCalculator()
+		   Float Cost = CalculateCost(250.0, 1300.0, AV_DegradeRifleAutoLaser, PriceMult, RepBonus)		 		             
+		   Int CredAmount = PlayerRef.GetItemCount(Credits)
+		   button = MSG_RepairVendorMenuWeaponsRiflesAutoLaser.show(CurrentAV, CredAmount, Cost)
+		     
+			 If (button == 0)
+                RepairVendorMenu(GV_DebuffTokenRifleAutoLaser, None, AV_DegradeRifleAutoLaser, Cost)																		
+		 ElseIf (button == 1)									
+                MenuType = 5																		                                   
+	     ElseIf (button == 2)                                           
+				; Exit                                           
+				MenuOpened = False									                                                                            									
+		  EndIf
+
+ ElseIf MenuType == 14
+		   
+		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeRifleAutoParticle) 
+		   Float PriceMult = GV_PriceMultWeapon.GetValue()
+		   Float RepBonus = ReputationCalculator()
+		   Float Cost = CalculateCost(350.0, 1400.0, AV_DegradeRifleAutoParticle, PriceMult, RepBonus)		 		             
+		   Int CredAmount = PlayerRef.GetItemCount(Credits)
+		   button = MSG_RepairVendorMenuWeaponsRiflesAutoParticle.show(CurrentAV, CredAmount, Cost)
+		     
+			 If (button == 0)
+                RepairVendorMenu(GV_DebuffTokenRifleAutoParticle, None, AV_DegradeRifleAutoParticle, Cost)																		
+		 ElseIf (button == 1)									
+                MenuType = 5																		                                   
+	     ElseIf (button == 2)                                           
+				; Exit                                           
+				MenuOpened = False									                                                                            									
+		  EndIf
+
+ ElseIf MenuType == 15
 		   
 		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeRifleSemi) 
 		   Float PriceMult = GV_PriceMultWeapon.GetValue()
@@ -435,7 +548,43 @@ Function RepairEquipment(Int MenuType = 0, Int Button = 0, Bool MenuOpened = Tru
 				MenuOpened = False									                                                                            									
 		  EndIf
 
- ElseIf MenuType == 13
+ ElseIf MenuType == 16
+		   
+		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeRifleSemiLaser) 
+		   Float PriceMult = GV_PriceMultWeapon.GetValue()
+		   Float RepBonus = ReputationCalculator()
+		   Float Cost = CalculateCost(225.0, 1100.0, AV_DegradeRifleSemiLaser, PriceMult, RepBonus)		 		             
+		   Int CredAmount = PlayerRef.GetItemCount(Credits)
+		   button = MSG_RepairVendorMenuWeaponsRiflesSemiLaser.show(CurrentAV, CredAmount, Cost)
+		     
+			 If (button == 0)
+                RepairVendorMenu(GV_DebuffTokenRifleSemiLaser, None, AV_DegradeRifleSemiLaser, Cost)																		
+		 ElseIf (button == 1)									
+                MenuType = 5																		                                   
+	     ElseIf (button == 2)                                           
+				; Exit                                           
+				MenuOpened = False									                                                                            									
+		  EndIf
+
+ ElseIf MenuType == 17
+		   
+		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeRifleSemiParticle) 
+		   Float PriceMult = GV_PriceMultWeapon.GetValue()
+		   Float RepBonus = ReputationCalculator()
+		   Float Cost = CalculateCost(325.0, 1200.0, AV_DegradeRifleSemiParticle, PriceMult, RepBonus)		 		             
+		   Int CredAmount = PlayerRef.GetItemCount(Credits)
+		   button = MSG_RepairVendorMenuWeaponsRiflesSemiParticle.show(CurrentAV, CredAmount, Cost)
+		     
+			 If (button == 0)
+                RepairVendorMenu(GV_DebuffTokenRifleSemiParticle, None, AV_DegradeRifleSemiParticle, Cost)																		
+		 ElseIf (button == 1)									
+                MenuType = 5																		                                   
+	     ElseIf (button == 2)                                           
+				; Exit                                           
+				MenuOpened = False									                                                                            									
+		  EndIf
+
+ ElseIf MenuType == 18
 		   
 		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeShotgun) 
 		   Float PriceMult = GV_PriceMultWeapon.GetValue()
@@ -453,17 +602,179 @@ Function RepairEquipment(Int MenuType = 0, Int Button = 0, Bool MenuOpened = Tru
 				MenuOpened = False									                                                                            									
 		  EndIf
 
- ElseIf MenuType == 14
+ ElseIf MenuType == 19
+		   
+		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeShotgunParticle) 
+		   Float PriceMult = GV_PriceMultWeapon.GetValue()
+		   Float RepBonus = ReputationCalculator()
+		   Float Cost = CalculateCost(375.0, 2000.0, AV_DegradeShotgunParticle, PriceMult, RepBonus)		 		             
+		   Int CredAmount = PlayerRef.GetItemCount(Credits)
+		   button = MSG_RepairVendorMenuWeaponsShotgunsParticle.show(CurrentAV, CredAmount, Cost)
+		     
+			 If (button == 0)
+                RepairVendorMenu(GV_DebuffTokenShotgunsParticle, None, AV_DegradeShotgunParticle, Cost)																		
+		 ElseIf (button == 1)									
+                MenuType = 5																		                                   
+	     ElseIf (button == 2)                                           
+				; Exit                                           
+				MenuOpened = False									                                                                            									
+		  EndIf
+
+ ElseIf MenuType == 20
 		   
 		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeSniper) 
 		   Float PriceMult = GV_PriceMultWeapon.GetValue()
 		   Float RepBonus = ReputationCalculator()
-		   Float Cost = CalculateCost(200.0, 1800.0, AV_DegradeSniper, PriceMult, RepBonus)		 		             
+		   Float Cost = CalculateCost(200.0, 2000.0, AV_DegradeSniper, PriceMult, RepBonus)		 		             
 		   Int CredAmount = PlayerRef.GetItemCount(Credits)
 		   button = MSG_RepairVendorMenuWeaponsSniper.show(CurrentAV, CredAmount, Cost)
 		     
 			 If (button == 0)
                 RepairVendorMenu(GV_DebuffTokenSniper, None, AV_DegradeSniper, Cost)																		
+		 ElseIf (button == 1)									
+                MenuType = 5																		                                   
+	     ElseIf (button == 2)                                           
+				; Exit                                           
+				MenuOpened = False									                                                                            									
+		  EndIf
+
+ ElseIf MenuType == 21
+		   
+		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeSniperLaser) 
+		   Float PriceMult = GV_PriceMultWeapon.GetValue()
+		   Float RepBonus = ReputationCalculator()
+		   Float Cost = CalculateCost(300.0, 2100.0, AV_DegradeSniperLaser, PriceMult, RepBonus)		 		             
+		   Int CredAmount = PlayerRef.GetItemCount(Credits)
+		   button = MSG_RepairVendorMenuWeaponsSniperLaser.show(CurrentAV, CredAmount, Cost)
+		     
+			 If (button == 0)
+                RepairVendorMenu(GV_DebuffTokenSniperLaser, None, AV_DegradeSniperLaser, Cost)																		
+		 ElseIf (button == 1)									
+                MenuType = 5																		                                   
+	     ElseIf (button == 2)                                           
+				; Exit                                           
+				MenuOpened = False									                                                                            									
+		  EndIf
+
+ ElseIf MenuType == 22
+		   
+		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeSniperParticle) 
+		   Float PriceMult = GV_PriceMultWeapon.GetValue()
+		   Float RepBonus = ReputationCalculator()
+		   Float Cost = CalculateCost(400.0, 2200.0, AV_DegradeSniperParticle, PriceMult, RepBonus)		 		             
+		   Int CredAmount = PlayerRef.GetItemCount(Credits)
+		   button = MSG_RepairVendorMenuWeaponsSniperParticle.show(CurrentAV, CredAmount, Cost)
+		     
+			 If (button == 0)
+                RepairVendorMenu(GV_DebuffTokenSniperParticle, None, AV_DegradeSniperParticle, Cost)																		
+		 ElseIf (button == 1)									
+                MenuType = 5																		                                   
+	     ElseIf (button == 2)                                           
+				; Exit                                           
+				MenuOpened = False									                                                                            									
+		  EndIf
+
+ ElseIf MenuType == 23
+
+		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeHeavy) 
+		   Float PriceMult = GV_PriceMultWeapon.GetValue()
+		   Float RepBonus = ReputationCalculator()
+		   Float Cost = CalculateCost(300.0, 2400.0, AV_DegradeHeavy, PriceMult, RepBonus)		 		             
+		   Int CredAmount = PlayerRef.GetItemCount(Credits)
+		   button = MSG_RepairVendorMenuWeaponsMiniguns.show(CurrentAV, CredAmount, Cost)
+		     
+			 If (button == 0)
+                RepairVendorMenu(GV_DebuffTokenHeavy, None, AV_DegradeHeavy, Cost)																		
+		 ElseIf (button == 1)									
+                MenuType = 5																		                                   
+	     ElseIf (button == 2)                                           
+				; Exit                                           
+				MenuOpened = False									                                                                            									
+		  EndIf
+
+ ElseIf MenuType == 24
+
+		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeHeavyParticle) 
+		   Float PriceMult = GV_PriceMultWeapon.GetValue()
+		   Float RepBonus = ReputationCalculator()
+		   Float Cost = CalculateCost(500.0, 2600.0, AV_DegradeHeavyParticle, PriceMult, RepBonus)		 		             
+		   Int CredAmount = PlayerRef.GetItemCount(Credits)
+		   button = MSG_RepairVendorMenuWeaponsMinigunsParticle.show(CurrentAV, CredAmount, Cost)
+		     
+			 If (button == 0)
+                RepairVendorMenu(GV_DebuffTokenHeavyParticle, None, AV_DegradeHeavyParticle, Cost)																		
+		 ElseIf (button == 1)									
+                MenuType = 5																		                                   
+	     ElseIf (button == 2)                                           
+				; Exit                                           
+				MenuOpened = False									                                                                            									
+		  EndIf
+
+ ElseIf MenuType == 25
+		   
+		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeLauncher)  
+		   Float PriceMult = GV_PriceMultWeapon.GetValue()
+		   Float RepBonus = ReputationCalculator()
+		   Float Cost = CalculateCost(300.0, 2800.0, AV_DegradeLauncher, PriceMult, RepBonus)		 		             
+		   Int CredAmount = PlayerRef.GetItemCount(Credits)
+		   button = MSG_RepairVendorMenuWeaponsLaunchers.show(CurrentAV, CredAmount, Cost)
+		     
+			 If (button == 0)
+                RepairVendorMenu(GV_DebuffTokenExplosive, None, AV_DegradeLauncher, Cost)																		
+		 ElseIf (button == 1)									
+                MenuType = 5																		                                   
+	     ElseIf (button == 2)                                           
+				; Exit                                           
+				MenuOpened = False									                                                                            									
+		  EndIf
+
+ ElseIf MenuType == 26
+		   
+		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeLauncherParticle)  
+		   Float PriceMult = GV_PriceMultWeapon.GetValue()
+		   Float RepBonus = ReputationCalculator()
+		   Float Cost = CalculateCost(500.0, 3000.0, AV_DegradeLauncherParticle, PriceMult, RepBonus)		 		             
+		   Int CredAmount = PlayerRef.GetItemCount(Credits)
+		   button = MSG_RepairVendorMenuWeaponsLaunchersParticle.show(CurrentAV, CredAmount, Cost)
+		     
+			 If (button == 0)
+                RepairVendorMenu(GV_DebuffTokenExplosiveParticle, None, AV_DegradeLauncherParticle, Cost)																		
+		 ElseIf (button == 1)									
+                MenuType = 5																		                                   
+	     ElseIf (button == 2)                                           
+				; Exit                                           
+				MenuOpened = False									                                                                            									
+		  EndIf
+
+ ElseIf MenuType == 27
+		   
+		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeRifleEM) 
+		   Float PriceMult = GV_PriceMultWeapon.GetValue()
+		   Float RepBonus = ReputationCalculator()
+		   Float Cost = CalculateCost(300.0, 2100.0, AV_DegradeRifleEM, PriceMult, RepBonus)		 		             
+		   Int CredAmount = PlayerRef.GetItemCount(Credits)
+		   button = MSG_RepairVendorMenuWeaponsRiflesEM.show(CurrentAV, CredAmount, Cost)
+		     
+			 If (button == 0)
+                RepairVendorMenu(GV_DebuffTokenRifleEM, None, AV_DegradeRifleEM, Cost)																		
+		 ElseIf (button == 1)									
+                MenuType = 5																		                                   
+	     ElseIf (button == 2)                                           
+				; Exit                                           
+				MenuOpened = False									                                                                            									
+		  EndIf
+
+ ElseIf MenuType == 28
+		   
+		   Float CurrentAV = PlayerRef.Getvalue(AV_DegradeMelee)  
+		   Float PriceMult = GV_PriceMultWeapon.GetValue()
+		   Float RepBonus = ReputationCalculator()
+		   Float Cost = CalculateCost(100.0, 300.0, AV_DegradeMelee, PriceMult, RepBonus)		 		             
+		   Int CredAmount = PlayerRef.GetItemCount(Credits)
+		   button = MSG_RepairVendorMenuWeaponsMelee.show(CurrentAV, CredAmount, Cost)
+		     
+			 If (button == 0)
+                RepairVendorMenu(GV_DebuffTokenMelee, None, AV_DegradeMelee, Cost)																		
 		 ElseIf (button == 1)									
                 MenuType = 5																		                                   
 	     ElseIf (button == 2)                                           

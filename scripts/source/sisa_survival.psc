@@ -173,6 +173,7 @@ Group SISAGlobalVariables
     GlobalVariable Property GV_RoverRestrictDeploy Auto Const
     GlobalVariable Property GV_RadioToggle Auto Const
     GlobalVariable Property GV_SpaceshipSystemsToggle Auto Const
+    GlobalVariable Property GV_RejuvenationOnCooldown Auto Const
 EndGroup
 
 Group SISAObjectRef
@@ -232,6 +233,7 @@ Group SISAMessages
     Message Property MSGInGameTutorial_Activities Auto Const
     Message Property MSGInGameTutorial_ComplicatedTheft Auto Const
     Message Property MSG_SongbirdRadioMenu Auto Const
+    Message Property MSG_RejuvenationIsReady Auto Const
 EndGroup
 
 Group SISAFormLists
@@ -312,7 +314,7 @@ Int RadioSoundInstance = -1
 
 Function Update()
 
-	   While fVersion < 12.7
+	   While fVersion < 12.72
 			 Patch()                       
 	EndWhile
 
@@ -531,7 +533,18 @@ Function Patch()
 						EndIf
 				        (QuestHarsherAfflictions as SISA_HarsherAfflictions).Update()
 						(ItemInjector as SISA_ItemInjector).RefreshLists()
-						UpdateMessage.show(Version12, Version7, Version0)
+				  EndIf	
+		   ElseIf fVersion < 12.72
+			      fVersion = 12.72
+				  					 
+					 If StartStarvival.GetValue() == 1   
+						   If RoverSytems_PerkToggle.GetValue() == 1
+						      (QuestRoverSystems as SISA_Rover).Update()
+						EndIf
+						   If GV_EquipmentDegradationToggle.GetValue() == 1
+						      (QuestDegradeSystems as SISA_RepairSystemQuest).Update()
+						EndIf
+						UpdateMessage.show(Version12, Version7, Version2)
 				  EndIf	
 			EndIf
 
@@ -1227,8 +1240,16 @@ Event OnTimer(int aiTimerID)
 
 		 ElseIf (aiTimerID == 1)
                 PlayerRef.Removeitem(DaggerCheckToken, 999, True, None)
+		 ElseIf (aiTimerID == 2)
+                GV_RejuvenationOnCooldown.SetValue(0)
+		        MSG_RejuvenationIsReady.show()
 		  EndIf
 EndEvent
+
+Function RejuvenationCooldownStart()
+         GV_RejuvenationOnCooldown.SetValue(1)
+		 StartTimer(600, 2)
+EndFunction
 
 Function BoostpackReplenishCooldown()                  
 		 CooldownTimeFuel = 30.0

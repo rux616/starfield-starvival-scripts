@@ -20,6 +20,7 @@ GlobalVariable Property GV_RestrictionMode Auto Const
 GlobalVariable Property GV_CargoLimit Auto Const
 RefCollectionAlias Property CurrentCrew Auto Const mandatory
 Perk Property CrewPayloadsPerk Auto Const
+Conditionform Property CFRoverSystemsRank3Specific Auto Const Mandatory
 
 ObjectReference currentVehicle
 
@@ -28,7 +29,8 @@ Event OnInit()
 	  SetAngle(0, 0, GetAngleZ())
       MoveTo(self, 0.0, 0.0, 5.0, True, False)
 	  spaceshipreference akShip = SQ_PlayerShip.PlayerShip.GetShipRef()   
-	  Float CargoLimit = GV_CargoLimit.GetValue()
+	  Float RoverWeightForCargo = RoverWeightForShipCargo()	
+	  Float CargoLimit = GV_CargoLimit.GetValue() / RoverWeightForCargo
 	  Float CheckForPayloads = CheckCrewForPayloads()	
       Float Limit = akShip.GetShipMaxCargoWeight() * CheckForPayloads - akShip.GetWeightInContainer()	  
 	  
@@ -77,6 +79,15 @@ Event OnInit()
  		 Delete()         
 
 EndEvent
+
+Float Function RoverWeightForShipCargo()     
+	    Float RoverDecreasedWeight = 2.0
+	    If CFRoverSystemsRank3Specific.IsTrue(PlayerRef, None) 
+           Return RoverDecreasedWeight 
+     Else	
+           Return 1.0
+     EndIf
+EndFunction
 
 Function FindVehicleAndSpawn()
      

@@ -402,7 +402,8 @@ EndFunction
 
 Function StartFeeLandingTimer()
 		 If LandingFeeTimerPrepared == False
-		    StartTimerGameTime(1.0, 1)
+		    Utility.Wait(2.0)
+			StartTimerGameTime(2.0, 1)
             LandingFeeTimerPrepared = True
 	  EndIf
 EndFunction

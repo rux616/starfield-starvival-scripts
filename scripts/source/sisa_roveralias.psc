@@ -39,6 +39,7 @@ Conditionform Property CF_EngineSystems01 Auto Const Mandatory
 Conditionform Property CF_EngineSystems02 Auto Const Mandatory
 Conditionform Property CF_EngineSystems03 Auto Const Mandatory
 Conditionform Property CF_EngineSystems04 Auto Const Mandatory
+Conditionform Property CF_EngineSystemsSpecific Auto Const Mandatory
 wwiseevent Property SoundFX_OnSit Auto Const
 wwiseevent Property SoundFX_OnGetUp Auto Const
 Keyword Property KeywordResourceTypeOrganic Auto Const
@@ -49,9 +50,14 @@ Keyword Property KeywordResourceTypeLiquid Auto Const
 Keyword Property KeywordElementalBlastResource Auto Const
 MiscObject Property MiscObject_RoverModuleResourceStalker Auto Const
 Projectile Property PRJ_ArcWelder Auto Const
+Potion Property POTI_RoverToken Auto Const
 
 Bool VFXTriggered = False
+Bool ChallengeDone01 = False
+Bool ChallengeDone02 = False
+Bool ChallengeDone03 = False
 ObjectReference Target
+Int SpentTime = 0
 
 Event OnAliasInit()	
 	  Utility.Wait(0.01)
@@ -157,10 +163,9 @@ Function PlayerOnRoverSeat(ObjectReference akFurniture)
           Float ConsumeInterval = GV_ConsumeTimeInterval.GetValue()
           Float DamageInterval = GV_DamageTimeInterval.GetValue()
           
-		  If akFurniture.HasKeyword(RoverKeyword)             
-			   
-			    Target = akFurniture
-			    
+		  If akFurniture.HasKeyword(RoverKeyword)             			    
+				Target = akFurniture
+	    				
 				If GV_RoverSytems_TrunkAccessFromCargo.GetValue() == 0
                    GV_RoverSytems_TrunkAccessFromCargo.SetValue(1)
              EndIf
@@ -187,6 +192,9 @@ Function PlayerOnRoverSeat(ObjectReference akFurniture)
 			       StartTimer(DamageInterval, 1)
                    StartTimer(60, 3) 
 			       StartTimer(180, 2)
+			          If CF_EngineSystemsSpecific.IsTrue(PlayerRef, None)
+				         StartTimer(60, 5)
+			       EndIf
 			Else
 		           CancelTimers()
 		           GV_RoverSytems_IsInVehicle.SetValue(0)
@@ -254,6 +262,36 @@ Event OnTimer(int aiTimerID)
 		         StartTimer(60, 3)
 	     ElseIf (aiTimerID == 4)                  
 				 MSG_RoverMaintenanceLevel.show(GV_DamageTimeInterval.GetValue(), PlayerRef.GetValue(AV_RoverMaintenance), PlayerRef.GetBaseValue(AV_RoverMaintenance), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+	     ElseIf (aiTimerID == 5)                  
+	             Debug.Notification("TimerStarted")    
+					 If CF_EngineSystems03.IsTrue(PlayerRef, None) && ChallengeDone03 == False    		     
+		                  SpentTime += 1
+						  PlayerRef.EquipItem(POTI_RoverToken, False, True)	
+		                    If SpentTime >= 60 
+				               SpentTime = 0
+							   ChallengeDone03 = True								 		 
+	                     Else
+		                       StartTimer(60, 5)
+	                     EndIf                   
+                 ElseIf CF_EngineSystems02.IsTrue(PlayerRef, None) && ChallengeDone02 == False  	  
+		                  SpentTime += 1
+						  PlayerRef.EquipItem(POTI_RoverToken, False, True)	
+		                    If SpentTime >= 30 
+				               SpentTime = 0
+							   ChallengeDone02 = True								 		 
+	                     Else
+		                       StartTimer(60, 5)
+	                     EndIf  	          
+                 ElseIf CF_EngineSystems01.IsTrue(PlayerRef, None) && ChallengeDone01 == False 
+		                  SpentTime += 1
+						  PlayerRef.EquipItem(POTI_RoverToken, False, True)	
+							If SpentTime >= 15 
+				               SpentTime = 0
+							   ChallengeDone01 = True								 		 
+	                     Else
+		                       StartTimer(60, 5)  
+						 EndIf   
+                  EndIf
 		  EndIf
 
 EndEvent
@@ -367,6 +405,7 @@ Function CancelTimers()
 		 CancelTimer(1)
 		 CancelTimer(2)
 		 CancelTimer(3)
+		 CancelTimer(5)
 
 EndFunction
 

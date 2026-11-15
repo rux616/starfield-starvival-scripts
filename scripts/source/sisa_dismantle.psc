@@ -5,14 +5,28 @@ ActorValue Property AV_SPMHelmet Auto Const
 ActorValue Property AV_SPMBoostpack Auto Const
 ActorValue Property AV_SPMSpacesuit Auto Const
 ActorValue Property AV_SPMWeaponsRifleAuto Auto Const
+ActorValue Property AV_SPMWeaponsRifleAutoLaser Auto Const
+ActorValue Property AV_SPMWeaponsRifleAutoParticle Auto Const
 ActorValue Property AV_SPMWeaponsRifleSemi Auto Const
+ActorValue Property AV_SPMWeaponsRifleSemiLaser Auto Const
+ActorValue Property AV_SPMWeaponsRifleSemiParticle Auto Const
 ActorValue Property AV_SPMWeaponsHandgunAuto Auto Const
+ActorValue Property AV_SPMWeaponsHandgunAutoLaser Auto Const
+ActorValue Property AV_SPMWeaponsHandgunAutoParticle Auto Const
 ActorValue Property AV_SPMWeaponsHandgunSemi Auto Const
+ActorValue Property AV_SPMWeaponsHandgunSemiLaser Auto Const
+ActorValue Property AV_SPMWeaponsHandgunSemiParticle Auto Const
 ActorValue Property AV_SPMWeaponsLauncher Auto Const
+ActorValue Property AV_SPMWeaponsLauncherParticle Auto Const
 ActorValue Property AV_SPMWeaponsMinigun Auto Const
+ActorValue Property AV_SPMWeaponsMinigunParticle Auto Const
 ActorValue Property AV_SPMWeaponsMelee Auto Const
 ActorValue Property AV_SPMWeaponsShotgun Auto Const
+ActorValue Property AV_SPMWeaponsShotgunParticle Auto Const
 ActorValue Property AV_SPMWeaponsSniper Auto Const
+ActorValue Property AV_SPMWeaponsSniperLaser Auto Const
+ActorValue Property AV_SPMWeaponsSniperParticle Auto Const
+ActorValue Property AV_SPMWeaponsEM Auto Const
 ActorValue Property AV_SPMTools Auto Const
 ActorValue Property AV_WeaponDegradeTool Auto Const
 ActorValue Property AV_ToolHealthImpactDriver Auto Const
@@ -23,14 +37,28 @@ wwiseevent Property SFX_DismantleImpactDriver Auto Const
 wwiseevent Property SFX_DismantleHammer Auto Const
 Explosion Property EXPLO_Dismantle Auto Const
 Potion Property POTI_FieldRepairKitWeaponsShotguns Auto Const
+Potion Property POTI_FieldRepairKitWeaponsShotgunsParticle Auto Const
 Potion Property POTI_FieldRepairKitWeaponsMelee Auto Const
 Potion Property POTI_FieldRepairKitWeaponsMiniguns Auto Const
+Potion Property POTI_FieldRepairKitWeaponsMinigunsParticle Auto Const
 Potion Property POTI_FieldRepairKitWeaponsLaunchers Auto Const
+Potion Property POTI_FieldRepairKitWeaponsLaunchersParticle Auto Const
 Potion Property POTI_FieldRepairKitWeaponsHandgunsAuto Auto Const
+Potion Property POTI_FieldRepairKitWeaponsHandgunsAutoLaser Auto Const
+Potion Property POTI_FieldRepairKitWeaponsHandgunsAutoParticle Auto Const
 Potion Property POTI_FieldRepairKitWeaponsHandgunsSemi Auto Const
+Potion Property POTI_FieldRepairKitWeaponsHandgunsSemiLaser Auto Const
+Potion Property POTI_FieldRepairKitWeaponsHandgunsSemiParticle Auto Const
 Potion Property POTI_FieldRepairKitWeaponsRiflesAuto Auto Const
+Potion Property POTI_FieldRepairKitWeaponsRiflesAutoLaser Auto Const
+Potion Property POTI_FieldRepairKitWeaponsRiflesAutoParticle Auto Const
 Potion Property POTI_FieldRepairKitWeaponsRiflesSemi Auto Const
+Potion Property POTI_FieldRepairKitWeaponsRiflesSemiLaser Auto Const
+Potion Property POTI_FieldRepairKitWeaponsRiflesSemiParticle Auto Const
 Potion Property POTI_FieldRepairKitWeaponsSniper Auto Const
+Potion Property POTI_FieldRepairKitWeaponsSniperLaser Auto Const
+Potion Property POTI_FieldRepairKitWeaponsSniperParticle Auto Const
+Potion Property POTI_FieldRepairKitWeaponsEM Auto Const
 Potion Property POTI_FieldRepairKitTool Auto Const
 Potion Property POTI_FieldRepairKitSpacesuit Auto Const
 Potion Property POTI_FieldRepairKitBoostpack Auto Const
@@ -38,14 +66,28 @@ Potion Property POTI_FieldRepairKitHelmet Auto Const
 Potion Property POTI_DismantleToken_Armor Auto Const
 Potion Property POTI_DismantleToken_Weapon Auto Const
 Message Property MSG_CollectedPartsWeaponRifleAuto Auto Const
+Message Property MSG_CollectedPartsWeaponRifleAutoLaser Auto Const
+Message Property MSG_CollectedPartsWeaponRifleAutoParticle Auto Const
 Message Property MSG_CollectedPartsWeaponRifleSemi Auto Const
+Message Property MSG_CollectedPartsWeaponRifleSemiLaser Auto Const
+Message Property MSG_CollectedPartsWeaponRifleSemiParticle Auto Const
 Message Property MSG_CollectedPartsWeaponHandgunAuto Auto Const
+Message Property MSG_CollectedPartsWeaponHandgunAutoLaser Auto Const
+Message Property MSG_CollectedPartsWeaponHandgunAutoParticle Auto Const
 Message Property MSG_CollectedPartsWeaponHandgunSemi Auto Const
+Message Property MSG_CollectedPartsWeaponHandgunSemiLaser Auto Const
+Message Property MSG_CollectedPartsWeaponHandgunSemiParticle Auto Const
 Message Property MSG_CollectedPartsWeaponLauncher Auto Const
+Message Property MSG_CollectedPartsWeaponLauncherParticle Auto Const
 Message Property MSG_CollectedPartsWeaponMinigun Auto Const
+Message Property MSG_CollectedPartsWeaponMinigunParticle Auto Const
 Message Property MSG_CollectedPartsWeaponMelee Auto Const
 Message Property MSG_CollectedPartsWeaponShotgun Auto Const
+Message Property MSG_CollectedPartsWeaponShotgunParticle Auto Const
 Message Property MSG_CollectedPartsWeaponSniper Auto Const
+Message Property MSG_CollectedPartsWeaponSniperLaser Auto Const
+Message Property MSG_CollectedPartsWeaponSniperParticle Auto Const
+Message Property MSG_CollectedPartsWeaponEM Auto Const
 Message Property MSG_CollectedPartsTool Auto Const
 Message Property MSG_CollectedPartsSpacesuit Auto Const
 Message Property MSG_CollectedPartsBoostpack Auto Const
@@ -118,6 +160,36 @@ Function DismantleForWeaponsPartsRifleAuto(ObjectReference akTargetRef, Actor ak
   EndIf
 EndFunction
 
+Function DismantleForWeaponsPartsRifleAutoLaser(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+		  Else
+		       Float PerkBonus = PerkBonusWeapon()
+			   Dismantle(FLT_RestoreMinWPN, FLT_RestoreMaxWPN, PerkBonus, AV_SPMWeaponsRifleAutoLaser, akTargetRef, POTI_FieldRepairKitWeaponsRiflesAutoLaser, MSG_CollectedPartsWeaponRifleAutoLaser, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
+          EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function DismantleForWeaponsPartsRifleAutoParticle(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+		  Else
+		       Float PerkBonus = PerkBonusWeapon()
+			   Dismantle(FLT_RestoreMinWPN, FLT_RestoreMaxWPN, PerkBonus, AV_SPMWeaponsRifleAutoParticle, akTargetRef, POTI_FieldRepairKitWeaponsRiflesAutoParticle, MSG_CollectedPartsWeaponRifleAutoParticle, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
+          EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
 Function DismantleForWeaponsPartsRifleSemi(ObjectReference akTargetRef, Actor akActor)		     
      If PlayerRef.IsWeaponDrawn()
           akTargetRef.BlockActivation(True, True) 
@@ -126,6 +198,51 @@ Function DismantleForWeaponsPartsRifleSemi(ObjectReference akTargetRef, Actor ak
 		  Else
 		       Float PerkBonus = PerkBonusWeapon()
 		       Dismantle(FLT_RestoreMinWPN, FLT_RestoreMaxWPN, PerkBonus, AV_SPMWeaponsRifleSemi, akTargetRef, POTI_FieldRepairKitWeaponsRiflesSemi, MSG_CollectedPartsWeaponRifleSemi, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
+          EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function DismantleForWeaponsPartsRifleSemiLaser(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+		  Else
+		       Float PerkBonus = PerkBonusWeapon()
+		       Dismantle(FLT_RestoreMinWPN, FLT_RestoreMaxWPN, PerkBonus, AV_SPMWeaponsRifleSemiLaser, akTargetRef, POTI_FieldRepairKitWeaponsRiflesSemiLaser, MSG_CollectedPartsWeaponRifleSemiLaser, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
+          EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function DismantleForWeaponsPartsRifleSemiParticle(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+		  Else
+		       Float PerkBonus = PerkBonusWeapon()
+		       Dismantle(FLT_RestoreMinWPN, FLT_RestoreMaxWPN, PerkBonus, AV_SPMWeaponsRifleSemiParticle, akTargetRef, POTI_FieldRepairKitWeaponsRiflesSemiParticle, MSG_CollectedPartsWeaponRifleSemiParticle, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
+          EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function DismantleForWeaponsPartsRifleEM(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+		  Else
+		       Float PerkBonus = PerkBonusWeapon()
+		       Dismantle(FLT_RestoreMinWPN, FLT_RestoreMaxWPN, PerkBonus, AV_SPMWeaponsEM, akTargetRef, POTI_FieldRepairKitWeaponsEM, MSG_CollectedPartsWeaponEM, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
           EndIf
           akTargetRef.BlockActivation(False, False)
   Else
@@ -148,6 +265,36 @@ Function DismantleForWeaponsPartsHandgunAuto(ObjectReference akTargetRef, Actor 
   EndIf
 EndFunction
 
+Function DismantleForWeaponsPartsHandgunAutoLaser(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+		  Else
+		       Float PerkBonus = PerkBonusWeapon()
+		       Dismantle(FLT_RestoreMinWPN, FLT_RestoreMaxWPN, PerkBonus, AV_SPMWeaponsHandgunAutoLaser, akTargetRef, POTI_FieldRepairKitWeaponsHandgunsAutoLaser, MSG_CollectedPartsWeaponHandgunAutoLaser, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
+          EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function DismantleForWeaponsPartsHandgunAutoParticle(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+		  Else
+		       Float PerkBonus = PerkBonusWeapon()
+		       Dismantle(FLT_RestoreMinWPN, FLT_RestoreMaxWPN, PerkBonus, AV_SPMWeaponsHandgunAutoParticle, akTargetRef, POTI_FieldRepairKitWeaponsHandgunsAutoParticle, MSG_CollectedPartsWeaponHandgunAutoParticle, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
+          EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
 Function DismantleForWeaponsPartsHandgunSemi(ObjectReference akTargetRef, Actor akActor)		     
      If PlayerRef.IsWeaponDrawn()
           akTargetRef.BlockActivation(True, True) 
@@ -156,6 +303,36 @@ Function DismantleForWeaponsPartsHandgunSemi(ObjectReference akTargetRef, Actor 
 		  Else
 		       Float PerkBonus = PerkBonusWeapon()
 		       Dismantle(FLT_RestoreMinWPN, FLT_RestoreMaxWPN, PerkBonus, AV_SPMWeaponsHandgunSemi, akTargetRef, POTI_FieldRepairKitWeaponsHandgunsSemi, MSG_CollectedPartsWeaponHandgunSemi, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
+          EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function DismantleForWeaponsPartsHandgunSemiLaser(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+		  Else
+		       Float PerkBonus = PerkBonusWeapon()
+		       Dismantle(FLT_RestoreMinWPN, FLT_RestoreMaxWPN, PerkBonus, AV_SPMWeaponsHandgunSemiLaser, akTargetRef, POTI_FieldRepairKitWeaponsHandgunsSemiLaser, MSG_CollectedPartsWeaponHandgunSemiLaser, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
+          EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function DismantleForWeaponsPartsHandgunSemiParticle(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+		  Else
+		       Float PerkBonus = PerkBonusWeapon()
+		       Dismantle(FLT_RestoreMinWPN, FLT_RestoreMaxWPN, PerkBonus, AV_SPMWeaponsHandgunSemiParticle, akTargetRef, POTI_FieldRepairKitWeaponsHandgunsSemiParticle, MSG_CollectedPartsWeaponHandgunSemiParticle, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
           EndIf
           akTargetRef.BlockActivation(False, False)
   Else
@@ -178,6 +355,21 @@ Function DismantleForWeaponsPartsLauncher(ObjectReference akTargetRef, Actor akA
   EndIf
 EndFunction
 
+Function DismantleForWeaponsPartsLauncherParticle(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+		  Else
+		       Float PerkBonus = PerkBonusWeapon()
+		       Dismantle(FLT_RestoreMinWPNLauncher, FLT_RestoreMaxWPNLauncher, PerkBonus, AV_SPMWeaponsLauncherParticle, akTargetRef, POTI_FieldRepairKitWeaponsLaunchersParticle, MSG_CollectedPartsWeaponLauncherParticle, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
+          EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
 Function DismantleForWeaponsPartsMinigun(ObjectReference akTargetRef, Actor akActor)		     
      If PlayerRef.IsWeaponDrawn()
           akTargetRef.BlockActivation(True, True) 
@@ -186,6 +378,21 @@ Function DismantleForWeaponsPartsMinigun(ObjectReference akTargetRef, Actor akAc
 		  Else
 		       Float PerkBonus = PerkBonusWeapon()
 		       Dismantle(FLT_RestoreMinWPNMinigun, FLT_RestoreMaxWPNMinigun, PerkBonus, AV_SPMWeaponsMinigun, akTargetRef, POTI_FieldRepairKitWeaponsMiniguns, MSG_CollectedPartsWeaponMinigun, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
+          EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function DismantleForWeaponsPartsMinigunParticle(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+		  Else
+		       Float PerkBonus = PerkBonusWeapon()
+		       Dismantle(FLT_RestoreMinWPNMinigun, FLT_RestoreMaxWPNMinigun, PerkBonus, AV_SPMWeaponsMinigunParticle, akTargetRef, POTI_FieldRepairKitWeaponsMinigunsParticle, MSG_CollectedPartsWeaponMinigunParticle, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
           EndIf
           akTargetRef.BlockActivation(False, False)
   Else
@@ -223,6 +430,21 @@ Function DismantleForWeaponsPartsShotgun(ObjectReference akTargetRef, Actor akAc
   EndIf
 EndFunction
 
+Function DismantleForWeaponsPartsShotgunParticle(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+		  Else
+		       Float PerkBonus = PerkBonusWeapon()
+		       Dismantle(FLT_RestoreMinWPN, FLT_RestoreMaxWPN, PerkBonus, AV_SPMWeaponsShotgunParticle, akTargetRef, POTI_FieldRepairKitWeaponsShotgunsParticle, MSG_CollectedPartsWeaponShotgunParticle, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
+          EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
 Function DismantleForToolParts(ObjectReference akTargetRef, Actor akActor)    
      If PlayerRef.IsWeaponDrawn()
           akTargetRef.BlockActivation(True, True) 
@@ -246,6 +468,36 @@ Function DismantleForWeaponsPartsSniper(ObjectReference akTargetRef, Actor akAct
 		  Else
 		       Float PerkBonus = PerkBonusWeapon()
 		       Dismantle(FLT_RestoreMinWPN, FLT_RestoreMaxWPN, PerkBonus, AV_SPMWeaponsSniper, akTargetRef, POTI_FieldRepairKitWeaponsSniper, MSG_CollectedPartsWeaponSniper, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
+          EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function DismantleForWeaponsPartsSniperLaser(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+		  Else
+		       Float PerkBonus = PerkBonusWeapon()
+		       Dismantle(FLT_RestoreMinWPN, FLT_RestoreMaxWPN, PerkBonus, AV_SPMWeaponsSniperLaser, akTargetRef, POTI_FieldRepairKitWeaponsSniperLaser, MSG_CollectedPartsWeaponSniperLaser, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
+          EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function DismantleForWeaponsPartsSniperParticle(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+		  Else
+		       Float PerkBonus = PerkBonusWeapon()
+		       Dismantle(FLT_RestoreMinWPN, FLT_RestoreMaxWPN, PerkBonus, AV_SPMWeaponsSniperParticle, akTargetRef, POTI_FieldRepairKitWeaponsSniperParticle, MSG_CollectedPartsWeaponSniperParticle, SFX_DismantleImpactDriver, POTI_DismantleToken_Weapon)
           EndIf
           akTargetRef.BlockActivation(False, False)
   Else
@@ -316,6 +568,42 @@ Function RepairRifleSemi(ObjectReference akTargetRef, Actor akActor)
   EndIf
 EndFunction
 
+Function RepairRifleSemiLaser(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+        ElseIf PlayerRef.GetValue(AV_ToolHealthImpactDriver) <= 0
+		       MSG_ImpactDrillBatteryStatusEmpty.Show()
+        ElseIf PlayerRef.GetItemCount(POTI_FieldRepairKitWeaponsRiflesSemiLaser) <= 0
+		       MSG_FieldKitNone.Show()
+		  Else
+		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsRiflesSemiLaser, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
+         EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function RepairRifleSemiParticle(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+        ElseIf PlayerRef.GetValue(AV_ToolHealthImpactDriver) <= 0
+		       MSG_ImpactDrillBatteryStatusEmpty.Show()
+        ElseIf PlayerRef.GetItemCount(POTI_FieldRepairKitWeaponsRiflesSemiParticle) <= 0
+		       MSG_FieldKitNone.Show()
+		  Else
+		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsRiflesSemiParticle, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
+         EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
 Function RepairRifleAuto(ObjectReference akTargetRef, Actor akActor)		     
      If PlayerRef.IsWeaponDrawn()
           akTargetRef.BlockActivation(True, True) 
@@ -327,6 +615,60 @@ Function RepairRifleAuto(ObjectReference akTargetRef, Actor akActor)
 		       MSG_FieldKitNone.Show()
 		  Else
 		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsRiflesAuto, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
+         EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function RepairRifleAutoLaser(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+        ElseIf PlayerRef.GetValue(AV_ToolHealthImpactDriver) <= 0
+		       MSG_ImpactDrillBatteryStatusEmpty.Show()
+        ElseIf PlayerRef.GetItemCount(POTI_FieldRepairKitWeaponsRiflesAutoLaser) <= 0
+		       MSG_FieldKitNone.Show()
+		  Else
+		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsRiflesAutoLaser, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
+         EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function RepairRifleAutoParticle(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+        ElseIf PlayerRef.GetValue(AV_ToolHealthImpactDriver) <= 0
+		       MSG_ImpactDrillBatteryStatusEmpty.Show()
+        ElseIf PlayerRef.GetItemCount(POTI_FieldRepairKitWeaponsRiflesAutoParticle) <= 0
+		       MSG_FieldKitNone.Show()
+		  Else
+		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsRiflesAutoParticle, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
+         EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function RepairRifleEM(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+        ElseIf PlayerRef.GetValue(AV_ToolHealthImpactDriver) <= 0
+		       MSG_ImpactDrillBatteryStatusEmpty.Show()
+        ElseIf PlayerRef.GetItemCount(POTI_FieldRepairKitWeaponsEM) <= 0
+		       MSG_FieldKitNone.Show()
+		  Else
+		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsEM, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
          EndIf
           akTargetRef.BlockActivation(False, False)
   Else
@@ -352,6 +694,24 @@ Function RepairMinigun(ObjectReference akTargetRef, Actor akActor)
   EndIf
 EndFunction
 
+Function RepairMinigunParticle(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+        ElseIf PlayerRef.GetValue(AV_ToolHealthImpactDriver) <= 0
+		       MSG_ImpactDrillBatteryStatusEmpty.Show()
+        ElseIf PlayerRef.GetItemCount(POTI_FieldRepairKitWeaponsMinigunsParticle) <= 0
+		       MSG_FieldKitNone.Show()
+		  Else
+		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsMinigunsParticle, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
+         EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
 Function RepairLauncher(ObjectReference akTargetRef, Actor akActor)		     
      If PlayerRef.IsWeaponDrawn()
           akTargetRef.BlockActivation(True, True) 
@@ -363,6 +723,24 @@ Function RepairLauncher(ObjectReference akTargetRef, Actor akActor)
 		       MSG_FieldKitNone.Show()
 		  Else
 		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsLaunchers, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
+         EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function RepairLauncherParticle(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+        ElseIf PlayerRef.GetValue(AV_ToolHealthImpactDriver) <= 0
+		       MSG_ImpactDrillBatteryStatusEmpty.Show()
+        ElseIf PlayerRef.GetItemCount(POTI_FieldRepairKitWeaponsLaunchersParticle) <= 0
+		       MSG_FieldKitNone.Show()
+		  Else
+		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsLaunchersParticle, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
          EndIf
           akTargetRef.BlockActivation(False, False)
   Else
@@ -406,6 +784,24 @@ Function RepairShotgun(ObjectReference akTargetRef, Actor akActor)
   EndIf
 EndFunction
 
+Function RepairShotgunParticle(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+        ElseIf PlayerRef.GetValue(AV_ToolHealthImpactDriver) <= 0
+		       MSG_ImpactDrillBatteryStatusEmpty.Show()
+        ElseIf PlayerRef.GetItemCount(POTI_FieldRepairKitWeaponsShotgunsParticle) <= 0
+		       MSG_FieldKitNone.Show()
+		  Else
+		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsShotgunsParticle, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
+         EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
 Function RepairHandgunAuto(ObjectReference akTargetRef, Actor akActor)		     
      If PlayerRef.IsWeaponDrawn()
           akTargetRef.BlockActivation(True, True) 
@@ -424,6 +820,42 @@ Function RepairHandgunAuto(ObjectReference akTargetRef, Actor akActor)
   EndIf
 EndFunction
 
+Function RepairHandgunAutoLaser(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+        ElseIf PlayerRef.GetValue(AV_ToolHealthImpactDriver) <= 0
+		       MSG_ImpactDrillBatteryStatusEmpty.Show()
+        ElseIf PlayerRef.GetItemCount(POTI_FieldRepairKitWeaponsHandgunsAutoLaser) <= 0
+		       MSG_FieldKitNone.Show()
+		  Else
+		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsHandgunsAutoLaser, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
+         EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function RepairHandgunAutoParticle(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+        ElseIf PlayerRef.GetValue(AV_ToolHealthImpactDriver) <= 0
+		       MSG_ImpactDrillBatteryStatusEmpty.Show()
+        ElseIf PlayerRef.GetItemCount(POTI_FieldRepairKitWeaponsHandgunsAutoParticle) <= 0
+		       MSG_FieldKitNone.Show()
+		  Else
+		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsHandgunsAutoParticle, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
+         EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
 Function RepairHandgunSemi(ObjectReference akTargetRef, Actor akActor)		     
      If PlayerRef.IsWeaponDrawn()
           akTargetRef.BlockActivation(True, True) 
@@ -435,6 +867,42 @@ Function RepairHandgunSemi(ObjectReference akTargetRef, Actor akActor)
 		       MSG_FieldKitNone.Show()
 		  Else
 		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsHandgunsSemi, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
+         EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function RepairHandgunSemiLaser(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+        ElseIf PlayerRef.GetValue(AV_ToolHealthImpactDriver) <= 0
+		       MSG_ImpactDrillBatteryStatusEmpty.Show()
+        ElseIf PlayerRef.GetItemCount(POTI_FieldRepairKitWeaponsHandgunsSemiLaser) <= 0
+		       MSG_FieldKitNone.Show()
+		  Else
+		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsHandgunsSemiLaser, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
+         EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function RepairHandgunSemiParticle(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+        ElseIf PlayerRef.GetValue(AV_ToolHealthImpactDriver) <= 0
+		       MSG_ImpactDrillBatteryStatusEmpty.Show()
+        ElseIf PlayerRef.GetItemCount(POTI_FieldRepairKitWeaponsHandgunsSemiParticle) <= 0
+		       MSG_FieldKitNone.Show()
+		  Else
+		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsHandgunsSemiParticle, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
          EndIf
           akTargetRef.BlockActivation(False, False)
   Else
@@ -471,6 +939,42 @@ Function RepairSniper(ObjectReference akTargetRef, Actor akActor)
 		       MSG_FieldKitNone.Show()
 		  Else
 		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsSniper, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
+         EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function RepairSniperLaser(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+        ElseIf PlayerRef.GetValue(AV_ToolHealthImpactDriver) <= 0
+		       MSG_ImpactDrillBatteryStatusEmpty.Show()
+        ElseIf PlayerRef.GetItemCount(POTI_FieldRepairKitWeaponsSniperLaser) <= 0
+		       MSG_FieldKitNone.Show()
+		  Else
+		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsSniperLaser, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
+         EndIf
+          akTargetRef.BlockActivation(False, False)
+  Else
+          MSG_ToolUnsheath.Show()
+  EndIf
+EndFunction
+
+Function RepairSniperParticle(ObjectReference akTargetRef, Actor akActor)		     
+     If PlayerRef.IsWeaponDrawn()
+          akTargetRef.BlockActivation(True, True) 
+			If PlayerRef.GetValue(AV_WeaponDegradeTool) <= 0
+		       MSG_ToolIsBroken.Show()
+        ElseIf PlayerRef.GetValue(AV_ToolHealthImpactDriver) <= 0
+		       MSG_ImpactDrillBatteryStatusEmpty.Show()
+        ElseIf PlayerRef.GetItemCount(POTI_FieldRepairKitWeaponsSniperParticle) <= 0
+		       MSG_FieldKitNone.Show()
+		  Else
+		       RepairWithImpactDriver(POTI_FieldRepairKitWeaponsSniperParticle, akTargetRef, SFX_DismantleImpactDriver, FLT_RestoreMinWPN, FLT_RestoreMaxWPN)
          EndIf
           akTargetRef.BlockActivation(False, False)
   Else

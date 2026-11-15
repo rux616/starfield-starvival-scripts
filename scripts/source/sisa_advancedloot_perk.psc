@@ -14,6 +14,11 @@ wwiseevent Property UnlockingSoundFX02 Auto Const
 wwiseevent Property UnlockingSoundFX03 Auto Const
 Conditionform Property CF_TerminalObjects Auto Const Mandatory
 Conditionform Property CF_SecurityRank4 Auto Const Mandatory
+GlobalVariable Property GV_DummyDoorForVendingUnlocked Auto Const
+ObjectReference Property DummyDoor Auto Const
+Keyword Property KWD_Hacked Auto Const
+MiscObject Property MSC_Credits Auto Const
+EffectShader Property VFX_Sparks Auto Const
 
 Function Fragment_EntryHackNovice_00(ObjectReference akTargetRef, Actor akActor)
          akTargetRef.Activate(PlayerRef)
@@ -90,6 +95,39 @@ EndFunction
 Function Fragment_EntryRemoveLockGuardMasterWithBonus_11(ObjectReference akTargetRef, Actor akActor) 		                	  	               
          RemoveLockGuard(akTargetRef, 8, 75, 8)
 EndFunction
+
+Function Fragment_EntryHackVendingMachine_12(ObjectReference akTargetRef, Actor akActor) 		                	  	               
+         PrepareDummyDoorForHack()
+		 Utility.Wait(0.2)
+		 If GV_DummyDoorForVendingUnlocked.GetValue() == 1       
+			   If !akTargetRef.Haskeyword(KWD_Hacked)		              	
+                  akTargetRef.AddKeyword(KWD_Hacked)  
+				  UnregisterForRemoteEvent(DummyDoor, "OnLockStateChanged")
+				  Int CredAmount = Utility.RandomInt(250, 3000)
+				  Utility.Wait(1.5)
+				  PlayerRef.Additem(MSC_Credits, CredAmount, False) 
+                  VFX_Sparks.Play(akTargetRef, 0.5)
+			EndIf
+     EndIf
+EndFunction
+
+Function PrepareDummyDoorForHack()
+      
+	  RegisterForRemoteEvent(DummyDoor, "OnLockStateChanged")      
+	  GV_DummyDoorForVendingUnlocked.SetValue(0)      
+	  DummyDoor.Lock(True, False, False)
+      DummyDoor.SetLockLevel(50)
+      DummyDoor.Activate(PlayerRef)
+
+EndFunction
+
+Event ObjectReference.OnLockStateChanged(ObjectReference akSource)
+         
+		 If DummyDoor.IsLocked() == False
+            GV_DummyDoorForVendingUnlocked.SetValue(1)
+      EndIf
+
+EndEvent
 
 Function RemoveLockGuard(ObjectReference akTargetRef, Int Count, Int Locklevel, Int ChanceToReturnDigipic)
   

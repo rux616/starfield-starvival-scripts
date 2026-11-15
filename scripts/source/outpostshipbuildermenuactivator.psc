@@ -1,6 +1,7 @@
 ScriptName OutpostShipbuilderMenuActivator Extends OutpostEventHandlerParent
 
 Quest Property QuestSpaceshipSystems Auto Const
+Quest Property FameAndRepQuest Auto Const
 Actor Property PlayerRef Auto Const
 ActorBase Property OutpostShipbuilderVendor Auto Const mandatory
 ActorValue Property SpaceshipTotalFuelAmountBase Auto Const
@@ -28,10 +29,15 @@ GlobalVariable Property ShipServicesFuelStandby Auto Const
 GlobalVariable Property ShipServicesMaintenanceAtWork Auto Const
 GlobalVariable Property GV_RoverFuelPriceMult Auto Const
 GlobalVariable Property GV_RoverRepairPriceMult Auto Const
+GlobalVariable Property GV_FameAndReputationToggle Auto Const
 Conditionform Property ConditionFormFuelDiscount01 Auto Const Mandatory
 Conditionform Property ConditionFormFuelDiscount02 Auto Const Mandatory
 Conditionform Property ConditionFormFuelDiscount03 Auto Const Mandatory
 Conditionform Property ConditionFormFuelDiscount04 Auto Const Mandatory
+Conditionform Property ConditionFormRoverSystems01 Auto Const Mandatory
+Conditionform Property ConditionFormRoverSystems02 Auto Const Mandatory
+Conditionform Property ConditionFormRoverSystems03 Auto Const Mandatory
+Conditionform Property ConditionFormRoverSystems04 Auto Const Mandatory
 MiscObject Property Credits Auto Const
 MiscObject Property MaintenanceKit Auto Const
 Weapon Property MiscObj_RoverFuel Auto Const
@@ -186,8 +192,10 @@ Function VehicleMenuRefuel(Int MenuType = 0, Int Button = 0, Bool MenuOpened = T
 				   Float fuelCostPerUnit = MiscObj_RoverFuel.GetGoldValue() * GV_RoverFuelPriceMult.GetValue()
 	               Float FuelAmount = 0.0
                    Float FinalCostFuel = 0.0					  					                   
-			       FuelAmount = PlayerRef.GetBaseValue(AV_RoverFuel) - PlayerRef.GetValue(AV_RoverFuel)   
-	               FinalCostFuel = Math.Round(FuelAmount * fuelCostPerUnit / DiscountCalculate) as Float		    			
+			       Float RepBonus = RepCalculator() 
+			       Float RoverSystemsDiscount = RoverSystemsDiscountCost()
+				   FuelAmount = PlayerRef.GetBaseValue(AV_RoverFuel) - PlayerRef.GetValue(AV_RoverFuel)   
+	               FinalCostFuel = Math.Round(FuelAmount * fuelCostPerUnit / DiscountCalculate / RepBonus / RoverSystemsDiscount) as Float		    			
 			       Float FuelTankVehicleAmount = PlayerRef.GetBaseValue(AV_RoverFuel)                               
 			       Float TotalFuelInTheVehicleTank = PlayerRef.GetValue(AV_RoverFuel)
 				   Float CalculateVehicleFuel = TotalFuelInTheVehicleTank / FuelTankVehicleAmount * 100
@@ -225,8 +233,10 @@ Function VehicleMenuRepair(Int MenuType = 0, Int Button = 0, Bool MenuOpened = T
 	               Float MaintenanceCostPerUnit = MiscObj_RoverMaintenanceKit.GetGoldValue() / 25 * GV_RoverRepairPriceMult.GetValue()
 	               Float RepairAmount = 0.0
                    Float FinalCostRepair = 0.0					  			
+			       Float RepBonus = RepCalculator() 
+			       Float RoverSystemsDiscount = RoverSystemsDiscountCost()
 			       RepairAmount = PlayerRef.GetBaseValue(AV_RoverMaintenance) - PlayerRef.GetValue(AV_RoverMaintenance)   
-	               FinalCostRepair = Math.Round(RepairAmount * MaintenanceCostPerUnit / DiscountCalculate) as Float
+	               FinalCostRepair = Math.Round(RepairAmount * MaintenanceCostPerUnit / DiscountCalculate / RepBonus / RoverSystemsDiscount) as Float
 			       Float MaintenanceVehicleAmount = PlayerRef.GetBaseValue(AV_RoverMaintenance)                               
 			       Float TotalVehicleMaitenanceAvailable = PlayerRef.GetValue(AV_RoverMaintenance)
 				   Float CalculateVehicleMaintenance = TotalVehicleMaitenanceAvailable / MaintenanceVehicleAmount * 100			       
@@ -270,6 +280,88 @@ Float Function DiscountCost()
 Else	
            Return DiscountPercent00
      EndIf
+
+EndFunction
+
+Float Function RoverSystemsDiscountCost()
+     
+	 Float DiscountPercent00 = 1.00
+     Float DiscountPercent01 = 1.10 	 
+     Float DiscountPercent02 = 1.15 
+     Float DiscountPercent03 = 1.20 
+     Float DiscountPercent04 = 1.30 	 
+		
+		If ConditionFormRoverSystems04.IsTrue(PlayerRef, None)     
+		   Return DiscountPercent04 
+	ElseIf ConditionFormRoverSystems03.IsTrue(PlayerRef, None)  
+	       Return DiscountPercent03
+	ElseIf ConditionFormRoverSystems02.IsTrue(PlayerRef, None)	 
+           Return DiscountPercent02
+	ElseIf ConditionFormRoverSystems01.IsTrue(PlayerRef, None)
+           Return DiscountPercent01 
+Else	
+           Return DiscountPercent00
+     EndIf
+
+EndFunction
+
+Float Function FameAndRepCheck()
+
+      Float FameAndRepEnabled = 1.0
+      Float FameAndRepDisabled = 0.0
+
+      If GV_FameAndReputationToggle.GetValue() == 1
+         return FameAndRepEnabled
+  Else
+         return FameAndRepDisabled   
+   EndIf
+
+EndFunction
+
+Float Function RepCalculator()
+	  
+	  Float IfReputation00 = 0.50 	   
+	  Float IfReputation10 = 0.60      
+	  Float IfReputation20 = 0.70
+	  Float IfReputation30 = 0.80      
+	  Float IfReputation40 = 0.90 
+	  Float IfReputation50 = 1.00
+	  Float IfReputation60 = 1.10      
+	  Float IfReputation70 = 1.20
+	  Float IfReputation80 = 1.30      
+	  Float IfReputation90 = 1.40 
+	  Float IfReputation100 = 1.50
+	  Float IfFameAndRepDisabled = FameAndRepCheck()
+	  
+	  If IfFameAndRepDisabled == 0.0
+         Return IfReputation50 	  
+   EndIf       
+	  
+	  ActorValue AVCheck = (FameAndRepQuest as SISA_FameAndRepMB).CheckForAV()
+	  
+      If PlayerRef.GetValue(AVCheck) < 10
+         Return IfReputation00
+  ElseIf PlayerRef.GetValue(AVCheck) >= 10 && PlayerRef.GetValue(AVCheck) < 20
+         Return IfReputation10
+  ElseIf PlayerRef.GetValue(AVCheck) >= 20 && PlayerRef.GetValue(AVCheck) < 30
+         Return IfReputation20
+  ElseIf PlayerRef.GetValue(AVCheck) >= 30 && PlayerRef.GetValue(AVCheck) < 40
+         Return IfReputation30
+  ElseIf PlayerRef.GetValue(AVCheck) >= 40 && PlayerRef.GetValue(AVCheck) < 50
+         Return IfReputation40
+  ElseIf PlayerRef.GetValue(AVCheck) >= 50 && PlayerRef.GetValue(AVCheck) < 60
+         Return IfReputation50
+  ElseIf PlayerRef.GetValue(AVCheck) >= 60 && PlayerRef.GetValue(AVCheck) < 70
+         Return IfReputation60
+  ElseIf PlayerRef.GetValue(AVCheck) >= 70 && PlayerRef.GetValue(AVCheck) < 80
+         Return IfReputation70
+  ElseIf PlayerRef.GetValue(AVCheck) >= 80 && PlayerRef.GetValue(AVCheck) < 90
+         Return IfReputation80
+  ElseIf PlayerRef.GetValue(AVCheck) >= 90 && PlayerRef.GetValue(AVCheck) < 100
+         Return IfReputation90
+  ElseIf PlayerRef.GetValue(AVCheck) >= 100
+         Return IfReputation100
+   EndIf
 
 EndFunction
 

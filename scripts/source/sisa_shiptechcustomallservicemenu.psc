@@ -33,6 +33,10 @@ Conditionform Property ConditionFormFuelDiscount01 Auto Const Mandatory
 Conditionform Property ConditionFormFuelDiscount02 Auto Const Mandatory
 Conditionform Property ConditionFormFuelDiscount03 Auto Const Mandatory
 Conditionform Property ConditionFormFuelDiscount04 Auto Const Mandatory
+Conditionform Property ConditionFormRoverSystems01 Auto Const Mandatory
+Conditionform Property ConditionFormRoverSystems02 Auto Const Mandatory
+Conditionform Property ConditionFormRoverSystems03 Auto Const Mandatory
+Conditionform Property ConditionFormRoverSystems04 Auto Const Mandatory
 MiscObject Property Credits Auto Const
 MiscObject Property MaintenanceKit Auto Const
 Weapon Property MiscObj_RoverFuel Auto Const
@@ -161,14 +165,15 @@ Function VehicleMenuRefuel(Int MenuType = 0, Int Button = 0, Bool MenuOpened = T
 		 If Button == -1		 
      
 	 ElseIf MenuType == 0
-
+                   
+				   Float RoverSystemsDiscount = RoverSystemsDiscountCost()
 	               Float DiscountCalculate = DiscountCost() 	      
 	    		   Float RepBonus = RepCalculator() 	               
 				   Float fuelCostPerUnit = MiscObj_RoverFuel.GetGoldValue() * GV_RoverFuelPriceMult.GetValue()
 	               Float FuelAmount = 0.0
                    Float FinalCostFuel = 0.0					  					                   
 			       FuelAmount = PlayerRef.GetBaseValue(AV_RoverFuel) - PlayerRef.GetValue(AV_RoverFuel)   
-	               FinalCostFuel = Math.Round(FuelAmount * fuelCostPerUnit / DiscountCalculate / RepBonus) as Float		    			
+	               FinalCostFuel = Math.Round(FuelAmount * fuelCostPerUnit / DiscountCalculate / RepBonus/ RoverSystemsDiscount) as Float		    			
 			       
 				   Button = MSG_VehicleMenuRefuel.Show(FinalCostFuel, PlayerRef.GetValue(AV_RoverFuel), PlayerRef.GetBaseValue(AV_RoverFuel), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)	                    				   
 				   
@@ -198,14 +203,15 @@ Function VehicleMenuRepair(Int MenuType = 0, Int Button = 0, Bool MenuOpened = T
 		 If Button == -1		 
      
 	 ElseIf MenuType == 0
-
+				   
+				   Float RoverSystemsDiscount = RoverSystemsDiscountCost()
 	               Float DiscountCalculate = DiscountCost() 	      
 	    		   Float RepBonus = RepCalculator() 	      
 	               Float MaintenanceCostPerUnit = MiscObj_RoverMaintenanceKit.GetGoldValue() / 25 * GV_RoverRepairPriceMult.GetValue()
 	               Float RepairAmount = 0.0
                    Float FinalCostRepair = 0.0					  			
 			       RepairAmount = PlayerRef.GetBaseValue(AV_RoverMaintenance) - PlayerRef.GetValue(AV_RoverMaintenance)   
-	               FinalCostRepair = Math.Round(RepairAmount * MaintenanceCostPerUnit / DiscountCalculate / RepBonus) as Float
+	               FinalCostRepair = Math.Round(RepairAmount * MaintenanceCostPerUnit / DiscountCalculate / RepBonus / RoverSystemsDiscount) as Float
 			       
 				   Button = MSG_VehicleMenuRepair.Show(FinalCostRepair, PlayerRef.GetValue(AV_RoverMaintenance), PlayerRef.GetBaseValue(AV_RoverMaintenance), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)	                    				   
 				   
@@ -303,6 +309,28 @@ Float Function DiscountCost()
 	ElseIf ConditionFormFuelDiscount02.IsTrue(PlayerRef, None)	 
            Return DiscountPercent02
 	ElseIf ConditionFormFuelDiscount01.IsTrue(PlayerRef, None)
+           Return DiscountPercent01 
+Else	
+           Return DiscountPercent00
+     EndIf
+
+EndFunction
+
+Float Function RoverSystemsDiscountCost()
+     
+	 Float DiscountPercent00 = 1.00
+     Float DiscountPercent01 = 1.10 	 
+     Float DiscountPercent02 = 1.15 
+     Float DiscountPercent03 = 1.20 
+     Float DiscountPercent04 = 1.30 	 
+		
+		If ConditionFormRoverSystems04.IsTrue(PlayerRef, None)     
+		   Return DiscountPercent04 
+	ElseIf ConditionFormRoverSystems03.IsTrue(PlayerRef, None)  
+	       Return DiscountPercent03
+	ElseIf ConditionFormRoverSystems02.IsTrue(PlayerRef, None)	 
+           Return DiscountPercent02
+	ElseIf ConditionFormRoverSystems01.IsTrue(PlayerRef, None)
            Return DiscountPercent01 
 Else	
            Return DiscountPercent00
