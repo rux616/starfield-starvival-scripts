@@ -93,6 +93,16 @@ Group SISASpells
     Spell Property ENVSystem_OxygenAdjustment Auto Const 
     Spell Property ENVSystem_AtmoPressure Auto Const 
     Spell Property ENVSystem_Magnetosphere Auto Const
+
+    Spell Property ENVSystem_MagnetosphereExtreme Auto Const
+    Spell Property ENVSystem_MagnetosphereMassive Auto Const
+    Spell Property ENVSystem_MagnetospherePowerfull Auto Const
+    Spell Property ENVSystem_MagnetosphereStrong Auto Const
+    Spell Property ENVSystem_MagnetosphereVeryStrong Auto Const
+    Spell Property ENVSystem_MagnetosphereNone Auto Const
+    Spell Property ENVSystem_MagnetosphereVeryWeak Auto Const
+    Spell Property ENVSystem_MagnetosphereWeak Auto Const
+
     Spell Property ENVSystem_WeatherAnomalies Auto Const 
     Spell Property ENVSystem_SolarFlare Auto Const
     Spell Property ENVSystem_SolarFlareEMPDMG Auto Const
@@ -109,7 +119,6 @@ Group SISASpells
     Spell Property ENVSystem_AdaptiveRadiationSpell Auto Const
     Spell Property ENVSystem_AdaptiveAirborneSpell Auto Const
     Spell Property ENVSystem_AdaptiveCorrosiveSpell Auto Const
-    Spell Property ENVSystem_AdaptiveRegenSpell Auto Const
     Spell Property ENVSystem_VisualFXSpell Auto Const
     Spell Property ENVSystem_AdaptiveDomeFXSpell Auto Const
     Spell Property ENVSystem_AdaptiveMessagingSpell Auto Const
@@ -342,6 +351,38 @@ Function RefreshEnvironmentSystem()
         PlayerRef.RemoveSpell(ENVSystem_Magnetosphere)
     EndIf
 
+    If (PlayerRef.HasSpell(ENVSystem_MagnetosphereExtreme))
+        PlayerRef.RemoveSpell(ENVSystem_MagnetosphereExtreme)
+    EndIf
+
+    If (PlayerRef.HasSpell(ENVSystem_MagnetosphereMassive))
+        PlayerRef.RemoveSpell(ENVSystem_MagnetosphereMassive)
+    EndIf
+    
+	If (PlayerRef.HasSpell(ENVSystem_MagnetospherePowerfull))
+        PlayerRef.RemoveSpell(ENVSystem_MagnetospherePowerfull)
+    EndIf
+    
+	If (PlayerRef.HasSpell(ENVSystem_MagnetosphereStrong))
+        PlayerRef.RemoveSpell(ENVSystem_MagnetosphereStrong)
+    EndIf
+    
+	If (PlayerRef.HasSpell(ENVSystem_MagnetosphereVeryStrong))
+        PlayerRef.RemoveSpell(ENVSystem_MagnetosphereVeryStrong)
+    EndIf
+    
+	If (PlayerRef.HasSpell(ENVSystem_MagnetosphereNone))
+        PlayerRef.RemoveSpell(ENVSystem_MagnetosphereNone)
+    EndIf
+    
+	If (PlayerRef.HasSpell(ENVSystem_MagnetosphereVeryWeak))
+        PlayerRef.RemoveSpell(ENVSystem_MagnetosphereVeryWeak)
+    EndIf
+    
+	If (PlayerRef.HasSpell(ENVSystem_MagnetosphereWeak))
+        PlayerRef.RemoveSpell(ENVSystem_MagnetosphereWeak)
+    EndIf	
+
     If (PlayerRef.HasSpell(ENVSystem_WeatherAnomalies))
         PlayerRef.RemoveSpell(ENVSystem_WeatherAnomalies)
     EndIf
@@ -406,10 +447,6 @@ Function RefreshEnvironmentSystem()
         PlayerRef.RemoveSpell(ENVSystem_AdaptiveMessagingSpell)
     EndIf
 
-    ;If (PlayerRef.HasSpell(ENVSystem_AdaptiveRegenSpell))
-        ;PlayerRef.RemoveSpell(ENVSystem_AdaptiveRegenSpell)
-    ;EndIf
-
 	PlayerRef.DispelSpell(ENVSystem_SolarFlareEMPDMG)    
 	PlayerRef.DispelSpell(ENVSystem_PermafrostColdDMG)  	
 	PlayerRef.DispelSpell(ENVSystem_BlazeFireDMG) 
@@ -434,6 +471,14 @@ Function RefreshEnvironmentSystem()
     PlayerRef.AddSpell(ENVSystem_OxygenAdjustment, False)
     PlayerRef.AddSpell(ENVSystem_AtmoPressure, False)
     PlayerRef.AddSpell(ENVSystem_Magnetosphere, False)
+	PlayerRef.AddSpell(ENVSystem_MagnetosphereExtreme, False)
+    PlayerRef.AddSpell(ENVSystem_MagnetosphereMassive, False)
+	PlayerRef.AddSpell(ENVSystem_MagnetospherePowerfull, False)
+	PlayerRef.AddSpell(ENVSystem_MagnetosphereStrong, False)
+	PlayerRef.AddSpell(ENVSystem_MagnetosphereVeryStrong, False)
+	PlayerRef.AddSpell(ENVSystem_MagnetosphereNone, False)
+	PlayerRef.AddSpell(ENVSystem_MagnetosphereVeryWeak, False)
+	PlayerRef.AddSpell(ENVSystem_MagnetosphereWeak, False)	
     PlayerRef.AddSpell(ENVSystem_WeatherAnomalies, False)
     PlayerRef.AddSpell(ENVSystem_SolarFlare, False)
     PlayerRef.AddSpell(ENVSystem_Permafrost, False)
@@ -450,7 +495,6 @@ Function RefreshEnvironmentSystem()
     PlayerRef.AddSpell(ENVSystem_VisualFXSpell, False)
     PlayerRef.AddSpell(ENVSystem_AdaptiveDomeFXSpell, False)
     PlayerRef.AddSpell(ENVSystem_AdaptiveMessagingSpell, False)
-    ;PlayerRef.AddSpell(ENVSystem_AdaptiveRegenSpell, False)
 
 EndFunction
 
@@ -560,6 +604,38 @@ Function RefreshEnvironmentSystemOnUninstall()
         PlayerRef.RemoveSpell(ENVSystem_Magnetosphere)
     EndIf
 
+    If (PlayerRef.HasSpell(ENVSystem_MagnetosphereExtreme))
+        PlayerRef.RemoveSpell(ENVSystem_MagnetosphereExtreme)
+    EndIf
+
+    If (PlayerRef.HasSpell(ENVSystem_MagnetosphereMassive))
+        PlayerRef.RemoveSpell(ENVSystem_MagnetosphereMassive)
+    EndIf
+    
+	If (PlayerRef.HasSpell(ENVSystem_MagnetospherePowerfull))
+        PlayerRef.RemoveSpell(ENVSystem_MagnetospherePowerfull)
+    EndIf
+    
+	If (PlayerRef.HasSpell(ENVSystem_MagnetosphereStrong))
+        PlayerRef.RemoveSpell(ENVSystem_MagnetosphereStrong)
+    EndIf
+    
+	If (PlayerRef.HasSpell(ENVSystem_MagnetosphereVeryStrong))
+        PlayerRef.RemoveSpell(ENVSystem_MagnetosphereVeryStrong)
+    EndIf
+    
+	If (PlayerRef.HasSpell(ENVSystem_MagnetosphereNone))
+        PlayerRef.RemoveSpell(ENVSystem_MagnetosphereNone)
+    EndIf
+    
+	If (PlayerRef.HasSpell(ENVSystem_MagnetosphereVeryWeak))
+        PlayerRef.RemoveSpell(ENVSystem_MagnetosphereVeryWeak)
+    EndIf
+    
+	If (PlayerRef.HasSpell(ENVSystem_MagnetosphereWeak))
+        PlayerRef.RemoveSpell(ENVSystem_MagnetosphereWeak)
+    EndIf
+
     If (PlayerRef.HasSpell(ENVSystem_WeatherAnomalies))
         PlayerRef.RemoveSpell(ENVSystem_WeatherAnomalies)
     EndIf
@@ -623,10 +699,6 @@ Function RefreshEnvironmentSystemOnUninstall()
     If (PlayerRef.HasSpell(ENVSystem_AdaptiveMessagingSpell))
         PlayerRef.RemoveSpell(ENVSystem_AdaptiveMessagingSpell)
     EndIf
-
-    ;If (PlayerRef.HasSpell(ENVSystem_AdaptiveRegenSpell))
-        ;PlayerRef.RemoveSpell(ENVSystem_AdaptiveRegenSpell)
-    ;EndIf
 
     If Weather.GetCurrentWeather() == Weather_Agro01 || Weather.GetCurrentWeather() == Weather_Agro02 || Weather.GetCurrentWeather() == Weather_Tempest || Weather.GetCurrentWeather() == Weather_Cycle
        Weather.ReleaseOverride()               
@@ -707,15 +779,42 @@ Event OnTimer(int aiTimerID)
 		  EndIf
 EndEvent
 
-Function Update()         
-    If (PlayerRef.HasSpell(ENVSystem_ProtectionRegen))
-        PlayerRef.RemoveSpell(ENVSystem_ProtectionRegen)
-	    Utility.Wait(1.0)	
-        PlayerRef.AddSpell(ENVSystem_ProtectionRegen, False)
+Function Update()
+       If (PlayerRef.HasSpell(ENVSystem_Magnetosphere))
+           PlayerRef.RemoveSpell(ENVSystem_Magnetosphere)
+           Utility.Wait(1.0)
+		   PlayerRef.AddSpell(ENVSystem_Magnetosphere, False)
 	EndIf
-    If (PlayerRef.HasSpell(ENVSystem_VisualFXSpell))
-        PlayerRef.RemoveSpell(ENVSystem_VisualFXSpell)
-	    Utility.Wait(1.0)	
-        PlayerRef.AddSpell(ENVSystem_VisualFXSpell, False)
-    EndIf
+	   If (PlayerRef.HasSpell(ENVSystem_AtmoPressure))
+           PlayerRef.RemoveSpell(ENVSystem_AtmoPressure)
+           Utility.Wait(1.0)
+		   PlayerRef.AddSpell(ENVSystem_AtmoPressure, False)
+	EndIf
+		   PlayerRef.AddSpell(ENVSystem_MagnetosphereExtreme, False)
+		   PlayerRef.AddSpell(ENVSystem_MagnetosphereMassive, False)
+		   PlayerRef.AddSpell(ENVSystem_MagnetospherePowerfull, False)
+		   PlayerRef.AddSpell(ENVSystem_MagnetosphereStrong, False)
+		   PlayerRef.AddSpell(ENVSystem_MagnetosphereVeryStrong, False)
+		   PlayerRef.AddSpell(ENVSystem_MagnetosphereNone, False)
+		   PlayerRef.AddSpell(ENVSystem_MagnetosphereVeryWeak, False)
+		   PlayerRef.AddSpell(ENVSystem_MagnetosphereWeak, False)		   
+EndFunction
+
+Function UIHUDBridge()
+	    Utility.Wait(1.0)
+        PlayerRef.RemoveSpell(ENVSystem_PlanetaryEffects)
+	    UnregisterForActorValueChangedEvent(PlayerRef, AV_AdaptiveAirborne)
+	    UnregisterForActorValueChangedEvent(PlayerRef, AV_AdaptiveCorrosive)
+	    UnregisterForActorValueChangedEvent(PlayerRef, AV_AdaptiveRadiation)
+	    UnregisterForActorValueChangedEvent(PlayerRef, AV_AdaptiveThermal)
+EndFunction
+
+Function UIHUDBridgeDeconstruct()
+	    Utility.Wait(1.0)
+	    RegisterForActorValueChangedEvent(PlayerRef, AV_AdaptiveAirborne)
+	    RegisterForActorValueChangedEvent(PlayerRef, AV_AdaptiveCorrosive)
+	    RegisterForActorValueChangedEvent(PlayerRef, AV_AdaptiveRadiation)
+	    RegisterForActorValueChangedEvent(PlayerRef, AV_AdaptiveThermal)
+        PercentageTracker()
+        PlayerRef.AddSpell(ENVSystem_PlanetaryEffects, False)
 EndFunction

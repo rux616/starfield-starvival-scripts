@@ -22,6 +22,7 @@ Group SISAQuests
 	Quest Property QuestOxygen Auto Const
     Quest Property ItemInjector Auto Const
     Quest Property QuestToggler Auto Const
+    Quest Property QuestUIHUDBridges Auto Const
 EndGroup
 
 Group SISAActors
@@ -95,7 +96,6 @@ Group SISAPerks
     Perk Property DisableWeightForAidItems Auto Const
     Perk Property AddWeightToUnweightItemsPerk Auto Const
     Perk Property AdvancedLocksPerk Auto Const
-    Perk Property AdvancedLocksDoorsPerk Auto Const
     Perk Property PocketPantsPerk Auto Const
     Perk Property WeaponControlDebuffPerk Auto Const
     Perk Property JunkRecyclerPerk Auto Const
@@ -314,7 +314,7 @@ Int RadioSoundInstance = -1
 
 Function Update()
 
-	   While fVersion < 12.72
+	   While fVersion < 13.0
 			 Patch()                       
 	EndWhile
 
@@ -345,6 +345,7 @@ Function Patch()
                Int Version10 = 10
                Int Version11 = 11
                Int Version12 = 12
+               Int Version13 = 13
 		   
 		       If fVersion < 12.1
 			      fVersion = 12.1
@@ -518,9 +519,7 @@ Function Patch()
 				  HeartPlusSelfControlRestore.SetValue(0.5)	 
 				  CrewMoraleRepDMG.SetValue(0.15)
 				  ContrabandRepSell.SetValue(0.07)
-				  
-				  PlayerRef.RemovePerk(AdvancedLocksDoorsPerk)
-					 
+				  					 
 					 If StartStarvival.GetValue() == 1   
 						   If SurvivalToggler.GetValue() == 1
 						      (QuestBasicNeeds as SISA_BasicNeeds).Update()	
@@ -544,7 +543,22 @@ Function Patch()
 						   If GV_EquipmentDegradationToggle.GetValue() == 1
 						      (QuestDegradeSystems as SISA_RepairSystemQuest).Update()
 						EndIf
-						UpdateMessage.show(Version12, Version7, Version2)
+				  EndIf	
+		   ElseIf fVersion < 13.0
+			      fVersion = 13.0
+				  					 
+					 If StartStarvival.GetValue() == 1   
+						   If GV_SpaceshipSystemsToggle.GetValue() == 1
+						     (QuestSpaceshipSystems as SISA_SpaceshipFuel).Update()
+						EndIf
+						   If StealthTakeDownToggle.GetValue() == 1
+						     (QuestTakedowns as SISA_TakedownsQuest).Update()
+						EndIf
+						   If GV_EnviHazardsToggle.GetValue() == 1
+						     (QuestEnviHazards as SISA_EnviHazardsQuest).Update()
+						EndIf
+						QuestUIHUDBridges.Start()
+						UpdateMessage.show(Version13, Version0, Version0)
 				  EndIf	
 			EndIf
 
@@ -648,12 +662,11 @@ Function AddBook()
 
 EndFunction
 
-Function StartStarvival()
-                  
+Function StartStarvival()                  
+				  
 				  MSGModInitialize.Show(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)				  
-				  StartStarvival.SetValue(1)
-				  FadeToBlack()
-                  
+
+				  FadeToBlack()                  
 				  AddBook()
 				  Systems()                  
                   InstallIngameTutorials()
@@ -664,6 +677,8 @@ Function StartStarvival()
 	              RegisterForActorValueChangedEvent(PlayerRef, BoostpackFuelAV)
 				  RegisterForMenuOpenCloseEvent("DataMenu")                  
 				  StarvivalStart.Cast(PlayerRef, PlayerRef)
+				  StartStarvival.SetValue(1)
+                  QuestUIHUDBridges.Start()
 
 EndFunction
 
@@ -686,7 +701,7 @@ Event OnMenuOpenCloseEvent(String asMenuName, Bool abOpening)
          	     	 			 
 		 If asMenuName == "DataMenu"    
 			       If abOpening == True														      					   
-                      ;PercentageTracker()		              
+                      PercentageTracker()		              
 					  PlayerRef.AddSpell(SuitSystemMonitorUISpell, False)				      
 				Else
                             If (PlayerRef.HasSpell(SuitSystemMonitorUISpell))
@@ -703,12 +718,10 @@ Function PercentageTracker()
          GV_PercentageTracker_BoostpackFuel.SetValue(PlayerRef.GetValue(BoostpackFuelAV))		 	 
 EndFunction
 
-Event Actor.OnPlayerLoadGame(Actor akSender)
-	
+Event Actor.OnPlayerLoadGame(Actor akSender)       
 		If (SpaceshipArsenalInstalled.GetValue() == 1)
 	       ModulesUninstallOnLoad()
      EndIf
-
 EndEvent
 
 Function RemoveStuckVFX()
@@ -809,13 +822,13 @@ Function AdditionalSystems()
          PlayerRef.AddPerk(CollectionBuddiesPerk, False)
          PlayerRef.Addperk(CompanionQuickAccessPerk, False)		 
 		 
-		 PercentageTracker()
+		 ;PercentageTracker()
 		 
 		 Utility.Wait(WaitTime)
 		 PlayerRef.AddSpell(SuitRestrictionsSpell, False)		 
 		 PlayerRef.AddSpell(OverencumbranceSpell, False)		 
 		 PlayerRef.AddSpell(BoostpackFuelSpell, False) 		 
-         PlayerRef.AddSpell(SuitSystemMonitorUISpell, False)
+         ;PlayerRef.AddSpell(SuitSystemMonitorUISpell, False)
          PlayerRef.AddSpell(SuitSystemMonitorUISpellWatchHUD, False)
 		 PlayerRef.AddSpell(ComplicatedTheftSpell, False) 
 		 PlayerRef.AddSpell(SnowGlobeSpell, False) 
@@ -846,7 +859,6 @@ Function MissionExterminatus()
 		 PlayerRef.RemovePerk(AddWeightToUnweightItemsPerk)
 		 PlayerRef.RemovePerk(DisableWeightForAidItems)
 		 PlayerRef.RemovePerk(AdvancedLocksPerk)
-		 PlayerRef.RemovePerk(AdvancedLocksDoorsPerk)
 		 PlayerRef.RemovePerk(PocketPantsPerk)
 		 PlayerRef.RemovePerk(WeaponControlDebuffPerk)
 		 PlayerRef.RemovePerk(JunkRecyclerPerk)		   
@@ -987,11 +999,7 @@ Function SatiationCheckerBox(Int MenuType = 0, Int Button = 0, Bool MenuOpened =
 									ElseIf (button == 2)                                           										   
 										   MenuType = 1                                    
 									ElseIf (button == 3)                                           
-										       If !PlayerRef.IsInFaction(CrimsonFleetFaction)
-										          MenuType = 50 
-									        Else
-										          MenuType = 2 									
-									        EndIf
+										   MenuType = 2									
 									ElseIf (button == 4)                                           
 										   MenuType = 3 
 									ElseIf (button == 5)
@@ -1052,31 +1060,6 @@ Function SatiationCheckerBox(Int MenuType = 0, Int Button = 0, Bool MenuOpened =
 										   MenuOpened = False									                                                                            									
 									 EndIf
 
- ElseIf MenuType == 50  
-
-           Float ReputationCheckUC = PlayerRef.Getvalue(ReputationUC)
-           Float ReputationCheckFC = PlayerRef.Getvalue(ReputationFC)          
-           Float ReputationCheckIP = PlayerRef.Getvalue(Reputation)
-		   
-		   button = ReputationCheckerBoxWithoutCF.show(ReputationCheckUC, ReputationCheckFC, ReputationCheckIP)
-
-										If (button == 0)
-                                           RepPlayerStatusMenuToggle.SetValue(0)																		
-									ElseIf (button == 1)									
-                                           RepPlayerStatusMenuToggle.SetValue(1)																		
-									ElseIf (button == 2)									
-									        MenuType = 20
-									ElseIf (button == 3)
-									        MenuType = 21
-									ElseIf (button == 4)
-									        MenuType = 22
-									ElseIf (button == 5)									                                          
-										   MenuType = 0                                    
-									ElseIf (button == 6)                                           
-										   ; Exit                                           
-										   MenuOpened = False									                                                                            									
-									 EndIf
-
  ElseIf MenuType == 20  
 
            Float ReputationCheckUC = PlayerRef.Getvalue(ReputationUC)
@@ -1084,11 +1067,7 @@ Function SatiationCheckerBox(Int MenuType = 0, Int Button = 0, Bool MenuOpened =
 		   button = ReputationCheckerBoxUC.show(ReputationCheckUC)
 																		
 									    If (button == 0)									                                          
-										       If !PlayerRef.IsInFaction(CrimsonFleetFaction)
-										          MenuType = 50 
-									        Else
-										          MenuType = 2 									
-									        EndIf                                   
+										    MenuType = 2 									                                 
 									ElseIf (button == 1)                                           
 										   ; Exit                                           
 										   MenuOpened = False									                                                                            									
@@ -1101,11 +1080,7 @@ Function SatiationCheckerBox(Int MenuType = 0, Int Button = 0, Bool MenuOpened =
 		   button = ReputationCheckerBoxFC.show(ReputationCheckFC)
 																		
 									    If (button == 0)									                                          
-										       If !PlayerRef.IsInFaction(CrimsonFleetFaction)
-										          MenuType = 50 
-									        Else
-										          MenuType = 2 									
-									        EndIf                                   
+										    MenuType = 2 									                                 
 									ElseIf (button == 1)                                           
 										   ; Exit                                           
 										   MenuOpened = False									                                                                            									
@@ -1118,11 +1093,7 @@ Function SatiationCheckerBox(Int MenuType = 0, Int Button = 0, Bool MenuOpened =
 		   button = ReputationCheckerBoxIP.show(ReputationCheckIP)
 																		
 									    If (button == 0)									                                          
-										       If !PlayerRef.IsInFaction(CrimsonFleetFaction)
-										          MenuType = 50 
-									        Else
-										          MenuType = 2 									
-									        EndIf                                   
+										    MenuType = 2                                 
 									ElseIf (button == 1)                                           
 										   ; Exit                                           
 										   MenuOpened = False									                                                                            									
@@ -1956,4 +1927,23 @@ Function ComplicatedTheftToggle()
            PlayerRef.RemoveSpell(ComplicatedTheftSpell) 
 	 EndIf
 
+EndFunction
+
+Function UIHUDBridge()
+	    Utility.Wait(1.0)
+	    UnregisterForActorValueChangedEvent(PlayerRef, Oxygen)
+	    UnregisterForActorValueChangedEvent(PlayerRef, Soak)
+	    UnregisterForActorValueChangedEvent(PlayerRef, BoostpackFuelAV)
+		UnregisterForMenuOpenCloseEvent("DataMenu")  
+		PlayerRef.RemoveSpell(SuitSystemMonitorUISpell)
+EndFunction
+
+Function UIHUDBridgeDeconstruct()
+	    Utility.Wait(1.0)
+	    RegisterForActorValueChangedEvent(PlayerRef, Oxygen)
+	    RegisterForActorValueChangedEvent(PlayerRef, Soak)
+	    RegisterForActorValueChangedEvent(PlayerRef, BoostpackFuelAV)
+		RegisterForMenuOpenCloseEvent("DataMenu")  
+		PercentageTracker()
+		PlayerRef.AddSpell(SuitSystemMonitorUISpell, False)
 EndFunction

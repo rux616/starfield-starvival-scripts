@@ -29,7 +29,6 @@ Function ShipTechnicianMenu(Int MenuType = 0, Int Button = 0, Bool MenuOpened = 
 			Float TotalFuelInTheTank = akShip.GetValue(SpaceshipTotalFuelAmountBase)
 			Float CalculateFuel = TotalFuelInTheTank / FuelTankAmount * 100
 			(QuestSpaceshipSystems as SISA_SpaceshipFuel).CalculateFuelCost()			
-			Utility.Wait(0.05)
 			Button = MSG_SpaceshipTechnicianMenu.Show(ShipServicesFuelCost.GetValueInt(), CalculateFuel, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)	 
                    				   
 				   If Button == 0	                  

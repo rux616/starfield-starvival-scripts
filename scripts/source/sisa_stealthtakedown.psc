@@ -8,21 +8,17 @@ Idle Property IdleAnimMeleePowerAttack02 Mandatory Const Auto
 Idle Property IdleAnimMeleePowerAttack03 Mandatory Const Auto
 Idle Property IdleAnimRangedBash Mandatory Const Auto
 Idle Property IdleAnimRangedFire Mandatory Const Auto
-Perk Property PRK_TakeDownDamage Auto Const
-Perk Property PRK_TakeDownStun Auto Const
 ImageSpaceModifier Property theImod Const Auto
 Keyword Property KWD_RangedWPN Auto Const
 Keyword Property KWD_MeleeWPN Auto Const
-GlobalVariable Property GV_ExecutionNeeded Auto Const
-GlobalVariable Property GV_ExecutionAtWork Auto Const
+GlobalVariable Property GV_ExecutionAtWorkLethal Auto Const
+GlobalVariable Property GV_ExecutionAtWorkStun Auto Const
 Spell Property SPL_Force Auto Const
 
 Function Fragment_Entry_00(ObjectReference akTargetRef, Actor akActor)
          
-		 Int ExecutionAmount = GV_ExecutionNeeded.GetValue() As Int 
          Int RandomAnim = Utility.RandomInt(0, 2) 	     
-		 GV_ExecutionAtWork.SetValue(1)
-		 PlayerRef.AddPerk(PRK_TakeDownDamage, False)
+		 GV_ExecutionAtWorkLethal.SetValue(1)
 		 PlayerRef.DamageValue(AV_Execution, 1)
 		 StartTimer(2, 0)
 	     theImod.Apply()         
@@ -65,10 +61,8 @@ EndFunction
 
 Function Fragment_Entry_01(ObjectReference akTargetRef, Actor akActor)
 	     
-		 Int ExecutionAmount = GV_ExecutionNeeded.GetValue() As Int 
          Int RandomAnim = Utility.RandomInt(0, 2) 	     
-		 GV_ExecutionAtWork.SetValue(1)
-		 PlayerRef.AddPerk(PRK_TakeDownStun, False)
+		 GV_ExecutionAtWorkStun.SetValue(1)
 		 PlayerRef.DamageValue(AV_Execution, 1)
 		 StartTimer(2, 0)
 	     theImod.Apply()         
@@ -117,8 +111,8 @@ Function Fragment_Entry_03(ObjectReference akTargetRef, Actor akActor)
          
 		 SPL_Force.Cast(akTargetRef, akTargetRef) 	     		 
          Int RandomAnim = Utility.RandomInt(0, 2) 	     		 
-		 PlayerRef.AddPerk(PRK_TakeDownDamage, False)
-		 StartTimer(2, 1)
+		 GV_ExecutionAtWorkLethal.SetValue(1)
+		 StartTimer(2, 0)
 	     theImod.Apply()         
          
 		 If PlayerRef.GetEquippedWeapon(0) == WPN_Unarmed		 
@@ -135,7 +129,6 @@ Function Fragment_Entry_03(ObjectReference akTargetRef, Actor akActor)
 	 ElseIf PlayerRef.WornHasKeyword(KWD_RangedWPN)
             Utility.Wait(0.1)
 			PlayerRef.PlayIdle(IdleAnimRangedBash) 
-	        ;PlayerRef.PlayIdle(IdleAnimRangedFire) 
 	 ElseIf PlayerRef.WornHasKeyword(KWD_MeleeWPN)
                If RandomAnim == 0
 			      Utility.Wait(0.1)
@@ -151,20 +144,9 @@ Function Fragment_Entry_03(ObjectReference akTargetRef, Actor akActor)
 
 EndFunction
 
-Event OnTimer(int aiTimerID)
- 
+Event OnTimer(int aiTimerID) 
      	     If (aiTimerID == 0)
-			 	If PlayerRef.HasPerk(PRK_TakeDownDamage)
-				   PlayerRef.RemovePerk(PRK_TakeDownDamage)
-			 EndIf	
-				If PlayerRef.HasPerk(PRK_TakeDownStun)				
-				   PlayerRef.RemovePerk(PRK_TakeDownStun)
-		     EndIf
-		     GV_ExecutionAtWork.SetValue(0)
-     	 ElseIf (aiTimerID == 1)
-			 	If PlayerRef.HasPerk(PRK_TakeDownDamage)
-				   PlayerRef.RemovePerk(PRK_TakeDownDamage)
-			 EndIf			  
-		  Endif
-		  
+		         GV_ExecutionAtWorkLethal.SetValue(0)		  
+		         GV_ExecutionAtWorkStun.SetValue(0)	
+		  Endif		  
 EndEvent

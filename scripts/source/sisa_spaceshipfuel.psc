@@ -5187,7 +5187,6 @@ Function Register()
   
   Utility.Wait(0.2)
   PlayerRef.AddSpell(SpaceshipMaintenanceRepairSpell, False) 
-  PlayerRef.AddSpell(SpaceshipMaintenanceRepairSpellUI, False) 
   PlayerRef.AddSpell(SPL_FarTravelDisabler, False) 
   
   PlayerRef.Addperk(SpaceshipFuelDiscountPerk, False)
@@ -5226,7 +5225,6 @@ Function Unregister()
                 UnregisterForRemoteEvent(TheStarjackerDLC, "OnStageSet")				
 				
 				PlayerRef.RemoveSpell(SpaceshipMaintenanceRepairSpell)
-				PlayerRef.RemoveSpell(SpaceshipMaintenanceRepairSpellUI)
 				PlayerRef.RemoveSpell(SPL_FarTravelDisabler)	            
 				
 				PlayerRef.Removeperk(SpaceshipFuelDiscountPerk)
@@ -5431,7 +5429,6 @@ Function UnregisterMaintenance()
 				
 				PlayerRef.Removeperk(SpaceshipMaintenanceStationPerk)
 				PlayerRef.RemoveSpell(SpaceshipMaintenanceRepairSpell)
-				PlayerRef.RemoveSpell(SpaceshipMaintenanceRepairSpellUI)
                 PlayerRef.Removeperk(SpaceshipMalf_DebuffAutoRepair)
                 PlayerRef.Removeperk(SpaceshipMalf_DebuffAutoRepairRate)
                 PlayerRef.Removeperk(SpaceshipMalf_DebuffCargoCapacity)
@@ -5494,7 +5491,6 @@ Function RegisterMaintenance()
 				PlayerRef.AddPerk(SpaceshipMaintenanceStationPerk, False)
 				Utility.Wait(WaitTime)	
 				PlayerRef.AddSpell(SpaceshipMaintenanceRepairSpell, False)
-				PlayerRef.AddSpell(SpaceshipMaintenanceRepairSpellUI, False)
 				Utility.Wait(WaitTime)	
                 PlayerRef.AddPerk(SpaceshipMalf_DebuffAutoRepair, False)
 				Utility.Wait(WaitTime)	
@@ -5849,12 +5845,7 @@ ElseIf GV_SpaceshipCruiseFarTravelToggle.GetValue() == 1
 EndFunction
 
 Function Update()     
-		Quest TheStarjackerDLC = Game.GetFormFromFile(0x0000492D, "SFBGS003.esm") as Quest
-		RegisterForRemoteEvent(TheStarjackerDLC, "OnStageSet")
-        If TheStarjackerDLC.GetStageDone(JunkerShipAcquired)
-		   Utility.Wait(2.0)
-		   JunkerShipDLCBugFix()
-     EndIf
+         PlayerRef.RemoveSpell(SpaceshipMaintenanceRepairSpellUI)
 EndFunction
 
 Function RemoveDummyFuel()     

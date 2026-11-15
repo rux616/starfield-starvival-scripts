@@ -42,7 +42,8 @@ Event OnActorValueChanged(ObjectReference akObjRef, ActorValue akActorValue)
 	   If akObjRef == PlayerRef && akActorValue == ExecutionMeter
 	      Float ExecutionLevel = PlayerRef.GetValue(ExecutionMeter) 
 				   If ExecutionLevel >= 100.0
-				      PlayerRef.DamageValue(ExecutionMeter, 999)
+				      Utility.Wait(0.3)
+					  PlayerRef.DamageValue(ExecutionMeter, 999)
 				      	   If ConditionFormConcealmentRank4.IsTrue(PlayerRef, None)
 					              If PlayerRef.GetValue(ExecutionPoints) < 5
 				                     PlayerRef.RestoreValue(ExecutionPoints, 1)		

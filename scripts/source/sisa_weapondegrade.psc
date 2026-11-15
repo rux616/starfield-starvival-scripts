@@ -24,10 +24,11 @@ EndEvent
 Event OnAnimationEvent(ObjectReference akSource, string asEventName)
      	      
 	 If(asEventName == AnimEvent || asEventName == AnimEvent02)		        		  		  
-	    Float Scale = DegradeScale()
-	    Float HandyDandyBonus = HandyDandyMult()
-	    Float PerShotDMG = GV_PerShotDMG.GetValue()	
-		PlayerRef.DamageValue(AV_DegradeLevel, PerShotDMG / Scale / HandyDandyBonus)	     	          
+	            Float Scale = DegradeScale()
+	            Float HandyDandyBonus = HandyDandyMult()
+	            Float PerShotDMG = GV_PerShotDMG.GetValue()	
+				Float TotalDamage = PerShotDMG / Scale / HandyDandyBonus    	          
+				PlayerRef.DamageValue(AV_DegradeLevel, TotalDamage)
   EndIf
 
 EndEvent

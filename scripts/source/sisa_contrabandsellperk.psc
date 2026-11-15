@@ -153,20 +153,9 @@ Function SellContraband(ObjectReference akTargetRef, Int MenuType = 0, Int Butto
 					  PlayerRef.Additem(Credits, RewardFinal, False)
 
                        If FameAndRepToggle.GetValue() == 1
-                          Float RepDMGMult = ContrabandSellLowerRep.GetValue()
                           Float RepDMGMultTheKey = ContrabandSellTheKey.GetValue()
-						  Float RepDMGTotal = RepDMGMult * TotalAvailable 
 						  Float RepDMGTotalTheKey = RepDMGMultTheKey * TotalAvailable
-						    If PlayerRef.IsInFaction(CrimsonFleetFaction)
-						         If PlayerRef.IsInLocation(LocThekey)
-							        PlayerRef.RestoreValue(AV_CrimsonFleet, RepDMGTotalTheKey)
-                              Else
-						            PlayerRef.DamageValue(AVCheck, RepDMGTotal)
-							        PlayerRef.RestoreValue(AV_CrimsonFleet, RepDMGTotalTheKey)
-						      EndIf
-						 Else
-						       PlayerRef.DamageValue(AVCheck, RepDMGTotal)
-					     EndIf
+						  PlayerRef.RestoreValue(AV_CrimsonFleet, RepDMGTotalTheKey)
 					EndIf
 			   ElseIf Button == 1 
 					  ; Exit

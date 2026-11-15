@@ -167,6 +167,7 @@ Group SISAMagicEffects
     MagicEffect Property FoodPoisoningDebuff Auto Const
     MagicEffect Property AlcoholSelfControlStop Auto Const
     MagicEffect Property ObesityAddiction Auto Const
+	MagicEffect Property MGC_ChilledStage Auto Const
 EndGroup
 
 Group SISAMessages
@@ -303,7 +304,6 @@ Function StopBasicNeeds()
 	     UnregisterForActorValueChangedEvent(PlayerRef, SelfControl)
 	     UnregisterForActorValueChangedEvent(PlayerRef, Hygiene)
          UnregisterForMenuOpenCloseEvent("DataMenu")
-         UnregisterForMenuOpenCloseEvent("WorkshopMenu")
 EndFunction
 
 Function StartDrunkenness()	    
@@ -344,14 +344,14 @@ EndFunction
 
 Function StartSelfControl()	     
 		 PlayerRef.DamageValue(SelfControl, 999)
-		 PlayerRef.RestoreValue(SelfControl, 999)	
+		 PlayerRef.RestoreValue(SelfControl, 100)	
          PlayerRef.Addperk(SelfControlPerk, False) 
          PlayerRef.Addperk(SurvivalMonitorAddonSelfControl, False)
 EndFunction
 
 Function StopSelfControl()	     
 		 PlayerRef.DamageValue(SelfControl, 999)
-		 PlayerRef.RestoreValue(SelfControl, 999)	
+		 PlayerRef.RestoreValue(SelfControl, 100)	
          PlayerRef.Removeperk(SelfControlPerk)
 		 PlayerRef.Removeperk(SurvivalMonitorAddonSelfControl)
          CancelTimer(7)
@@ -409,7 +409,7 @@ Function PrepareAV()
 		 PlayerRef.RestoreValue(Drunkenness, 999)
 		 PlayerRef.DamageValue(Drunkenness, 999)		 
 		 PlayerRef.DamageValue(SelfControl, 999)
-		 PlayerRef.RestoreValue(SelfControl, 999)	
+		 PlayerRef.RestoreValue(SelfControl, 100)	
 		 PlayerRef.DamageValue(Hygiene, 999)
 		 PlayerRef.RestoreValue(Hygiene, 80)         
 		 PercentageTracker()
@@ -430,7 +430,7 @@ Function AddPerksAndSpell()
 		 Utility.Wait(WaitTime)
 		 
 		 PlayerRef.Addspell(SurvivalMonitorSpell, False)
-		 PlayerRef.Addspell(SurvivalMonitorUISpell, False) 
+		 ;PlayerRef.Addspell(SurvivalMonitorUISpell, False) 
 		 PlayerRef.Addspell(SurvivalMonitorHUDWatchSpell, False) 
 		 PlayerRef.Addspell(SurvivalMonitorNutriManagerSpell, False) 
 		 PlayerRef.Addspell(SurvivalMonitorOversatiationSpell, False) 
@@ -527,11 +527,7 @@ Function ResetOversatiationTimer()
 
 EndFunction
 
-Function Update()		 		 	 
-		 Utility.Wait(1.0)
-		 If !PlayerRef.HasSpell(SurvivalMonitorHUDWatchSpell)
-		     PlayerRef.Addspell(SurvivalMonitorHUDWatchSpell, False) 
-      EndIf
+Function Update()		 		 	 		 		 
 EndFunction
          
 Function SurvivalPointsRestoreAfterJail()
@@ -544,7 +540,7 @@ Function SurvivalPointsRestoreAfterJail()
 	     PlayerRef.RestoreValue(Sleep, 999)
 	     PlayerRef.RestoreValue(Thirst, 999)
 	     PlayerRef.RestoreValue(Oversatiation, 999)
-	     PlayerRef.RestoreValue(SelfControl, 999)
+	     PlayerRef.RestoreValue(SelfControl, 100)
 
          PlayerRef.DamageValue(Hunger, HungerDMG)
          PlayerRef.DamageValue(Sleep, SleepDMG)
@@ -564,13 +560,13 @@ Event OnMenuOpenCloseEvent(String asMenuName, Bool abOpening)
          	     	 			 
 		 If asMenuName == "DataMenu"    
 			       If abOpening == True														      					   
-                      ;PercentageTracker()
+                      PercentageTracker()
 					  PlayerRef.AddSpell(SurvivalMonitorUISpell, False) 
 				Else			                            
 						If (PlayerRef.HasSpell(SurvivalMonitorUISpell))
                             PlayerRef.RemoveSpell(SurvivalMonitorUISpell)
                      EndIf				   
-				EndIf  
+			EndIf  
 	  EndIf
 
 EndEvent
@@ -930,7 +926,7 @@ Event OnTimer(int aiTimerID)
 				       Float Duration = HeartPlusSelfCTRLTimeRestoration.GetValue()
                        Float Restore = HeartPlusSelfCTRLRestoration.GetValue()
 
-                       If SelfControlCheck >= 100
+                       If SelfControlCheck >= 125
                           SatiationChecker()
                           CancelTimer(7)
 				   Else
@@ -941,17 +937,26 @@ Event OnTimer(int aiTimerID)
 		  EndIf
 EndEvent
 
-Event ReferenceAlias.OnKill(ReferenceAlias akSender, ObjectReference akVictim)
+Float Function ChilledBonus()
+      If PlayerRef.HasMagicEffect(MGC_ChilledStage)
+         Return 1.30
+   Else
+         Return 1.0
+   EndIf
+EndFunction
 
-	   Float SelfControlOnHumanKillUC = SelfControlOnKillDMG_UnitedColonies.GetValue()
-	   Float SelfControlOnHumanKillFC = SelfControlOnKillDMG_FreestarCollective.GetValue()	   
-	   Float SelfControlOnHumanKillNEON = SelfControlOnKillDMG_Neon.GetValue()
-	   Float SelfControlOnHumanKillCF = SelfControlOnKillDMG_CrimsonFleet.GetValue()
-	   Float SelfControlOnHumanKillECL = SelfControlOnKillDMG_Ecliptic.GetValue()
-	   Float SelfControlOnHumanKillSpace = SelfControlOnKillDMG_Spacers.GetValue()
-	   Float SelfControlOnHumanKillVar = SelfControlOnKillDMG_Varuun.GetValue()
-	   Float SelfControlOnHumanKillDazra = SelfControlOnKillDMG_Dazra.GetValue()
-	   Float SelfControlOnHumanKillOther = SelfControlOnKillDMG_Other.GetValue()
+Event ReferenceAlias.OnKill(ReferenceAlias akSender, ObjectReference akVictim)
+       
+	   Float ChilledStage = ChilledBonus()
+	   Float SelfControlOnHumanKillUC = SelfControlOnKillDMG_UnitedColonies.GetValue() / ChilledStage
+	   Float SelfControlOnHumanKillFC = SelfControlOnKillDMG_FreestarCollective.GetValue() / ChilledStage	   
+	   Float SelfControlOnHumanKillNEON = SelfControlOnKillDMG_Neon.GetValue() / ChilledStage
+	   Float SelfControlOnHumanKillCF = SelfControlOnKillDMG_CrimsonFleet.GetValue() / ChilledStage
+	   Float SelfControlOnHumanKillECL = SelfControlOnKillDMG_Ecliptic.GetValue() / ChilledStage
+	   Float SelfControlOnHumanKillSpace = SelfControlOnKillDMG_Spacers.GetValue() / ChilledStage
+	   Float SelfControlOnHumanKillVar = SelfControlOnKillDMG_Varuun.GetValue() / ChilledStage
+	   Float SelfControlOnHumanKillDazra = SelfControlOnKillDMG_Dazra.GetValue() / ChilledStage
+	   Float SelfControlOnHumanKillOther = SelfControlOnKillDMG_Other.GetValue() / ChilledStage
 	   
 	   Float AlcoCheck = SelfControlAlcoCheck() 
 	   Float SelfControlToggleChecker = SelfControlCheck()      
@@ -997,16 +1002,17 @@ Event ReferenceAlias.OnKill(ReferenceAlias akSender, ObjectReference akVictim)
 EndEvent
 
 Event Actor.OnKill(Actor akSender, ObjectReference akVictim)
-	   	   
-	   Float SelfControlOnHumanKillUC = SelfControlOnKillDMG_UnitedColonies.GetValue()
-	   Float SelfControlOnHumanKillFC = SelfControlOnKillDMG_FreestarCollective.GetValue()	   
-	   Float SelfControlOnHumanKillNEON = SelfControlOnKillDMG_Neon.GetValue()
-	   Float SelfControlOnHumanKillCF = SelfControlOnKillDMG_CrimsonFleet.GetValue()
-	   Float SelfControlOnHumanKillECL = SelfControlOnKillDMG_Ecliptic.GetValue()
-	   Float SelfControlOnHumanKillSpace = SelfControlOnKillDMG_Spacers.GetValue()
-	   Float SelfControlOnHumanKillVar = SelfControlOnKillDMG_Varuun.GetValue()
-	   Float SelfControlOnHumanKillDazra = SelfControlOnKillDMG_Dazra.GetValue()
-	   Float SelfControlOnHumanKillOther = SelfControlOnKillDMG_Other.GetValue()
+       
+	   Float ChilledStage = ChilledBonus()	   	   
+	   Float SelfControlOnHumanKillUC = SelfControlOnKillDMG_UnitedColonies.GetValue() / ChilledStage
+	   Float SelfControlOnHumanKillFC = SelfControlOnKillDMG_FreestarCollective.GetValue() / ChilledStage   
+	   Float SelfControlOnHumanKillNEON = SelfControlOnKillDMG_Neon.GetValue() / ChilledStage
+	   Float SelfControlOnHumanKillCF = SelfControlOnKillDMG_CrimsonFleet.GetValue() / ChilledStage
+	   Float SelfControlOnHumanKillECL = SelfControlOnKillDMG_Ecliptic.GetValue() / ChilledStage
+	   Float SelfControlOnHumanKillSpace = SelfControlOnKillDMG_Spacers.GetValue() / ChilledStage
+	   Float SelfControlOnHumanKillVar = SelfControlOnKillDMG_Varuun.GetValue() / ChilledStage
+	   Float SelfControlOnHumanKillDazra = SelfControlOnKillDMG_Dazra.GetValue() / ChilledStage
+	   Float SelfControlOnHumanKillOther = SelfControlOnKillDMG_Other.GetValue() / ChilledStage
 	   
 	   Float AlcoCheck = SelfControlAlcoCheck()       
 	   Float SelfControlToggleChecker = SelfControlCheck()      
@@ -1559,11 +1565,11 @@ Float Function SelfControlDebuffCalc()
          Float DebuffMultStage3 = 3.0		 
 		 Float NoDebuff = 1.0
 		 
-		 If PlayerRef.GetValue(SelfControl) > 60 && PlayerRef.GetValue(SelfControl) <= 80 
+		 If PlayerRef.GetValue(SelfControl) >= 50 && PlayerRef.GetValue(SelfControl) < 75 
             Return DebuffMultStage1
-	 ElseIf PlayerRef.GetValue(SelfControl) > 40 && PlayerRef.GetValue(SelfControl) <= 60
+	 ElseIf PlayerRef.GetValue(SelfControl) >= 25 && PlayerRef.GetValue(SelfControl) < 50
             Return DebuffMultStage2
-	 ElseIf PlayerRef.GetValue(SelfControl) <= 40
+	 ElseIf PlayerRef.GetValue(SelfControl) < 25
             Return DebuffMultStage3	  
 	  Else
             Return NoDebuff
@@ -1578,11 +1584,11 @@ Float Function SelfControlDebuffCalcForSleep()
          Float DebuffMultStage3 = 4.0		 
 		 Float NoDebuff = 1.0
 		 
-		 If PlayerRef.GetValue(SelfControl) > 60 && PlayerRef.GetValue(SelfControl) <= 80 
+		 If PlayerRef.GetValue(SelfControl) >= 50 && PlayerRef.GetValue(SelfControl) < 75 
             Return DebuffMultStage1
-	 ElseIf PlayerRef.GetValue(SelfControl) > 40 && PlayerRef.GetValue(SelfControl) <= 60
+	 ElseIf PlayerRef.GetValue(SelfControl) >= 25 && PlayerRef.GetValue(SelfControl) < 50
             Return DebuffMultStage2
-	 ElseIf PlayerRef.GetValue(SelfControl) <= 40
+	 ElseIf PlayerRef.GetValue(SelfControl) < 25
             Return DebuffMultStage3	  
 	  Else
             Return NoDebuff
@@ -1851,4 +1857,31 @@ Function AutoNeedsOnLunchboxClose()
          StartTimer(2, 5)
          StartTimer(2, 55)
          StartTimer(2, 555)
+EndFunction
+
+Function UIHUDBridge()
+		 Utility.Wait(1.0)
+	     UnregisterForActorValueChangedEvent(PlayerRef, Hunger)
+	     UnregisterForActorValueChangedEvent(PlayerRef, Thirst)
+	     UnregisterForActorValueChangedEvent(PlayerRef, Sleep)
+	     UnregisterForActorValueChangedEvent(PlayerRef, Oversatiation)
+	     UnregisterForActorValueChangedEvent(PlayerRef, Drunkenness)
+	     UnregisterForActorValueChangedEvent(PlayerRef, SelfControl)
+	     UnregisterForActorValueChangedEvent(PlayerRef, Hygiene)
+         UnregisterForMenuOpenCloseEvent("DataMenu")		    
+		 PlayerRef.RemoveSpell(SurvivalMonitorUISpell)
+EndFunction
+
+Function UIHUDBridgeDeconstruct()
+		 Utility.Wait(1.0)
+	     RegisterForActorValueChangedEvent(PlayerRef, Hunger)
+	     RegisterForActorValueChangedEvent(PlayerRef, Thirst)
+	     RegisterForActorValueChangedEvent(PlayerRef, Sleep)
+	     RegisterForActorValueChangedEvent(PlayerRef, Oversatiation)
+	     RegisterForActorValueChangedEvent(PlayerRef, Drunkenness)
+	     RegisterForActorValueChangedEvent(PlayerRef, SelfControl)
+	     RegisterForActorValueChangedEvent(PlayerRef, Hygiene)
+         RegisterForMenuOpenCloseEvent("DataMenu")		    
+		 PercentageTracker()
+		 PlayerRef.AddSpell(SurvivalMonitorUISpell, False)
 EndFunction

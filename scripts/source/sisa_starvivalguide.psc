@@ -1,6 +1,7 @@
 Scriptname SISA_StarvivalGuide extends ObjectReference Const
 
 Quest Property StarvivalMainQuest Auto Const
+Quest Property StarvivalUIHUDBridgeQuest Auto Const
 Quest Property StarvivalFameAndRepQuest Auto Const
 Quest Property StarvivalSpaceshipFuelQuest Auto Const
 Quest Property StarvivalItemInjectorQuest Auto Const
@@ -850,7 +851,15 @@ Function Main(Int MenuType = 0, Int Button = 0, Bool MenuOpened = True)
 									ElseIf (button == 5)
 										   
 										   MenuType == 0									
-																		 
+
+									ElseIf (button == 6)
+
+										   MenuType == 0	
+														
+									ElseIf (button == 7)
+                                           (StarvivalUIHUDBridgeQuest as SISA_UIHUDBridges).ManualToggleFromBook()
+									ElseIf (button == 8)
+										   (StarvivalUIHUDBridgeQuest as SISA_UIHUDBridges).ManualToggleFromBook()			
 									 EndIf
 
  ElseIf MenuType == 20

@@ -8,8 +8,7 @@ GlobalVariable Property GV_ESPSTutorialCheck Auto Const
 
 Event OnEffectStart(ObjectReference akTarget, Actor akCaster, MagicEffect akBaseEffect, Float afMagnitude, Float afDuration)
       If GV_ESPSTutorialCheck.GetValue() == 0
-         Utility.Wait(2.0)
-		 TutorialMenu1()
+         StartTimer(5.0, 0)
    EndIf
 EndEvent
 
@@ -42,3 +41,9 @@ Function TutorialMenu4(Int Button = 0)
                       ;Exit
 				EndIf
 EndFunction
+
+Event OnTimer(int aiTimerID)	       	 
+		     If (aiTimerID == 0)
+                TutorialMenu1()
+		  EndIf
+EndEvent

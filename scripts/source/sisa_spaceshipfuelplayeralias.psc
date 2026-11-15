@@ -33,7 +33,6 @@ ReferenceAlias Property PlayerShipPilotSeat Auto mandatory
 MiscObject Property SpaceshipAutoRepairBotsMisc Auto Const 
 EffectShader Property VFXShipRecharger Auto Const Mandatory
 Keyword Property KWD_SpaceshipDebuffRepairCombatBot Auto Const
-
 Keyword Property KeywordSpaceshipAutoDelivery Auto Const
 GlobalVariable Property SpaceshipAutoDeliverer Auto Const
 ReferenceAlias Property HomeShip Auto Const mandatory

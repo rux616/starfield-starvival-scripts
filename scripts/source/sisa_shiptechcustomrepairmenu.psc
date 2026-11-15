@@ -45,7 +45,6 @@ Function ShipTechnicianMenu(Int MenuType = 0, Int Button = 0, Bool MenuOpened = 
             Float CalculateGravDriveHealthInPercent = akShip.GetValue(SpaceshipSystemGravdriveHealth) / akShip.GetBaseValue(SpaceshipSystemGravdriveHealth) * 100
             
 			(QuestSpaceshipSystems as SISA_SpaceshipFuel).CalculateRepairCost()
-			Utility.Wait(0.05)
 			Button = MSG_SpaceshipTechnicianMenu.Show(ShipServicesRepairCost.GetValueInt(), CalculateMaintenance, CalculateHull, CalculateWeaponHealthInPercent01, CalculateWeaponHealthInPercent02, CalculateWeaponHealthInPercent03, CalculateEngineHealthInPercent, CalculateShieldHealthInPercent, CalculateGravDriveHealthInPercent)	 
                    
 				   If Button == 0

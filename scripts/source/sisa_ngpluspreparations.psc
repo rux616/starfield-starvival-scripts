@@ -21,7 +21,6 @@ Group SISAPerks
     Perk Property FuelDiscountPerk Auto Const
     Perk Property StarviewOpenizer Auto Const
     Perk Property AdvancedLocksPerk Auto Const
-    Perk Property AdvancedLocksDoorsPerk Auto Const
     Perk Property PocketPantsPerk Auto Const
     Perk Property WeaponControlDebuffPerk Auto Const
     Perk Property RoverSystemsMenuPerk Auto Const
@@ -79,7 +78,6 @@ Event Quest.OnStageSet(Quest akSender, int auiStageID, int auiItemID)
 		PlayerRef.RemovePerk(FuelDiscountPerk)
 		PlayerRef.RemovePerk(StarviewOpenizer)
 		PlayerRef.RemovePerk(AdvancedLocksPerk)
-		PlayerRef.RemovePerk(AdvancedLocksDoorsPerk)
 		PlayerRef.RemovePerk(PocketPantsPerk)
 		PlayerRef.RemovePerk(WeaponControlDebuffPerk)
 		PlayerRef.RemovePerk(RoverSystemsMenuPerk)

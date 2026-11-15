@@ -319,8 +319,10 @@ Function StopShower()
 	     PlayerRef.SayCustom(DialogueSubTopicToSay, None, False, None)
 	      If GV_HygieneToggle.GetValue() == 1
 		       If UsingHygiene == False
-                  PlayerRef.RestoreValue(AV_Hygiene, 999)	
-                  PlayerRef.DamageValue(AV_Hygiene, 25)
+                     If PlayerRef.GetValue(AV_Hygiene) < 100
+				        PlayerRef.RestoreValue(AV_Hygiene, 999)	
+                        PlayerRef.DamageValue(AV_Hygiene, 25)
+	              EndIf
 	              PlayerRef.RestoreValue(AV_EnvDMG, 5)
             Else	
                   PlayerRef.RemoveItem(MSC_HygieneProducts, 1, False, None)

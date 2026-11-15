@@ -91,7 +91,6 @@ GlobalVariable Property GV_MissionBoardRewardMult_Cargo Auto Const
 GlobalVariable Property GV_MissionBoardRewardMult_Supply Auto Const
 GlobalVariable Property GV_MissionBoardRewardMult_Passenger Auto Const
 
-Spell Property FameStatusMenuSpell Auto Const
 Spell Property FameSpellPerkPoints Auto Const
 Spell Property FameSpellRewards Auto Const
 Spell Property FameSpellQuests Auto Const
@@ -207,46 +206,7 @@ Function RecalculateReputation()
 
 EndFunction
 
-Function Update()		        
-                  		 
-		 PlayerRef.RestoreValue(Reputation, 999)		         
-         PlayerRef.DamageValue(Reputation, 50)
-         PlayerRef.RestoreValue(AV_ReputationUC, 999)		         
-         PlayerRef.DamageValue(AV_ReputationUC, 50)
-         PlayerRef.RestoreValue(AV_ReputationFC, 999)		         
-         PlayerRef.DamageValue(AV_ReputationFC, 50)
-         PlayerRef.RestoreValue(AV_ReputationCF, 999)		         
-         PlayerRef.DamageValue(AV_ReputationCF, 50)
-
-		 PlayerRef.Removeperk(ReputationPerk) 
-		 PlayerRef.Removeperk(ReputationPerk_UC) 
-		 PlayerRef.Removeperk(ReputationPerk_FCNew) 
-		 PlayerRef.Removeperk(ReputationPerk_CF)
-         PlayerRef.RemoveSpell(ReputationStatusMenuSpell)
-         PlayerRef.RemoveSpell(IntimidationSpell)
-         PlayerRef.RemoveSpell(PositiveSpell)
-         
-		 UnregisterForMenuOpenCloseEvent("DataMenu")
-	     UnregisterForActorValueChangedEvent(PlayerRef, Reputation)
-	     UnregisterForActorValueChangedEvent(PlayerRef, AV_ReputationUC)
-	     UnregisterForActorValueChangedEvent(PlayerRef, AV_ReputationFC)
-	     UnregisterForActorValueChangedEvent(PlayerRef, AV_ReputationCF)
-         
-		 Utility.Wait(1.0)		 		
-		 PlayerRef.AddSpell(IntimidationSpell, False)
-		 PlayerRef.AddSpell(PositiveSpell, False)
-		 PlayerRef.AddSpell(ReputationStatusMenuSpell, False)
-         PlayerRef.AddPerk(ReputationPerk, False)		 
-         PlayerRef.AddPerk(ReputationPerk_UC, False)
-         PlayerRef.AddPerk(ReputationPerk_FCNew, False)
-         PlayerRef.AddPerk(ReputationPerk_CF, False)
-         RegisterForMenuOpenCloseEvent("DataMenu")
-	     RegisterForActorValueChangedEvent(PlayerRef, Reputation)
-	     RegisterForActorValueChangedEvent(PlayerRef, AV_ReputationUC)
-	     RegisterForActorValueChangedEvent(PlayerRef, AV_ReputationFC)
-	     RegisterForActorValueChangedEvent(PlayerRef, AV_ReputationCF)
-         PercentageTracker()
-
+Function Update()		                 
 EndFunction
 
 Function UpdateHotfix()		                          		 
@@ -257,7 +217,7 @@ Event OnMenuOpenCloseEvent(String asMenuName, Bool abOpening)
          	     	 			 
 		 If asMenuName == "DataMenu"    
 			       If abOpening == True														      					   
-                      ;PercentageTracker()
+                      PercentageTracker()
 					  PlayerRef.AddSpell(ReputationStatusMenuSpell, False)	
 				Else			                            			   
 						If (PlayerRef.HasSpell(ReputationStatusMenuSpell))
@@ -654,4 +614,26 @@ Function MissionBoardRewardsReset()
     
 	GV_SupplyRewardMultStore.SetValue(1.0)
 
+EndFunction
+
+Function UIHUDBridge()
+		 PlayerRef.RemoveSpell(ReputationStatusMenuSpell)         		 
+         UnregisterForMenuOpenCloseEvent("DataMenu")
+	     UnregisterForActorValueChangedEvent(PlayerRef, Reputation)
+	     UnregisterForActorValueChangedEvent(PlayerRef, AV_ReputationUC)
+	     UnregisterForActorValueChangedEvent(PlayerRef, AV_ReputationFC)
+	     UnregisterForActorValueChangedEvent(PlayerRef, AV_ReputationCF)
+	     UnregisterForActorValueChangedEvent(PlayerRef, Fame)
+EndFunction
+
+Function UIHUDBridgeDeconstruct()
+         Utility.Wait(1.0)		 
+         RegisterForMenuOpenCloseEvent("DataMenu")
+	     RegisterForActorValueChangedEvent(PlayerRef, Reputation)
+	     RegisterForActorValueChangedEvent(PlayerRef, AV_ReputationUC)
+	     RegisterForActorValueChangedEvent(PlayerRef, AV_ReputationFC)
+	     RegisterForActorValueChangedEvent(PlayerRef, AV_ReputationCF)
+	     RegisterForActorValueChangedEvent(PlayerRef, Fame)
+		 PercentageTracker()
+		 PlayerRef.AddSpell(ReputationStatusMenuSpell, False)
 EndFunction

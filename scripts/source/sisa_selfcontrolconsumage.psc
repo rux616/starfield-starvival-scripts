@@ -6,6 +6,7 @@ Conditionform Property ConditionFormProtectionBoth Auto Const Mandatory
 Conditionform Property ConditionFormProtectionInDialogue Auto Const Mandatory
 Conditionform Property ConditionFormProtectionInWorkshop Auto Const Mandatory
 GlobalVariable Property GV_NeedsProtectionToggle Auto Const
+MagicEffect Property MGC_ChilledStage Auto Const
 
 Float Property FLT_Timer = 1.0 Auto Const
 Float Property FLT_Consumage = 1.0 Auto Const
@@ -28,7 +29,9 @@ Event OnTimer(int aiTimerID)
 		 ElseIf GV_NeedsProtectionToggle.GetValue() == 3
                 ApplyDMG(ConditionFormProtectionBoth)
 		   Else
-		        PlayerRef.DamageValue(AV_SelfControl, FLT_Consumage)
+		        Float ChilledStage = ChilledBonus()
+				Float DMG = FLT_Consumage / ChilledStage
+				PlayerRef.DamageValue(AV_SelfControl, DMG)
 		  EndIf
 		  StartTimer(FLT_Timer, 0)		
 	EndIf
@@ -36,9 +39,17 @@ Event OnTimer(int aiTimerID)
 EndEvent
 
 Function ApplyDMG(Conditionform COND)
-
 		 If COND.IsTrue(PlayerRef, None)
-		    PlayerRef.DamageValue(AV_SelfControl, FLT_Consumage)
+		    Float ChilledStage = ChilledBonus()
+		    Float DMG = FLT_Consumage / ChilledStage
+		    PlayerRef.DamageValue(AV_SelfControl, DMG)
 	  EndIf
+EndFunction
 
+Float Function ChilledBonus()
+      If PlayerRef.HasMagicEffect(MGC_ChilledStage)
+         Return 1.30
+   Else
+         Return 1.0
+   EndIf
 EndFunction

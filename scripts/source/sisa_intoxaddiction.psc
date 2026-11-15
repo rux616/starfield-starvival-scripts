@@ -203,7 +203,7 @@ Event OnMenuOpenCloseEvent(String asMenuName, Bool abOpening)
          	     	 			 
 		 If asMenuName == "DataMenu"    
 			       If abOpening == True														      					   
-                      ;PercentageTracker()
+                      PercentageTracker()
 					  PlayerRef.AddSpell(IntoxicationWarningSpell, False)	
 				Else			                            
 						If (PlayerRef.HasSpell(IntoxicationWarningSpell))
@@ -320,11 +320,11 @@ Float Function SelfControlDebuffCalcForSleep()
          Float DebuffMultStage3 = 4.0		 
 		 Float NoDebuff = 1.0
 		 
-		 If PlayerRef.GetValue(SelfControl) > 60 && PlayerRef.GetValue(SelfControl) <= 80 
+		 If PlayerRef.GetValue(SelfControl) >= 50 && PlayerRef.GetValue(SelfControl) < 75 
             Return DebuffMultStage1
-	 ElseIf PlayerRef.GetValue(SelfControl) > 40 && PlayerRef.GetValue(SelfControl) <= 60
+	 ElseIf PlayerRef.GetValue(SelfControl) >= 25 && PlayerRef.GetValue(SelfControl) < 50
             Return DebuffMultStage2
-	 ElseIf PlayerRef.GetValue(SelfControl) <= 40
+	 ElseIf PlayerRef.GetValue(SelfControl) < 25
             Return DebuffMultStage3	  
 	  Else
             Return NoDebuff
@@ -745,13 +745,24 @@ Function AddichroneRestorationCancel()
          CancelTimer(1)
 EndFunction
 
-Function Update()		 
-		 If PlayerRef.HasSpell(IntoxicationWarningSpell)
-		    PlayerRef.RemoveSpell(IntoxicationWarningSpell) 
-            Utility.Wait(0.5)	
-           	PlayerRef.AddSpell(IntoxicationWarningSpell, False)  
-      EndIf
-      PlayerRef.DamageValue(Intoxication_Obesity, 999) 
+Function Update()
+EndFunction
+
+Function UIHUDBridge()
+      Utility.Wait(1.0)
+	  UnregisterForActorValueChangedEvent(PlayerRef, Intoxication_Alcoholism)
+	  UnregisterForActorValueChangedEvent(PlayerRef, Intoxication_Caffeinophagia)
+	  UnregisterForActorValueChangedEvent(PlayerRef, Intoxication_CognitiveDissolution)
+	  UnregisterForActorValueChangedEvent(PlayerRef, Intoxication_HeartAttack)
+	  UnregisterForActorValueChangedEvent(PlayerRef, Intoxication_ParanoidTreatment)
+	  UnregisterForActorValueChangedEvent(PlayerRef, Intoxication_StimulantsAddiction)
+	  UnregisterForActorValueChangedEvent(PlayerRef, Intoxication_Obesity)
+      UnregisterForMenuOpenCloseEvent("DataMenu")		    
+      PlayerRef.RemoveSpell(IntoxicationWarningSpell)
+EndFunction
+
+Function UIHUDBridgeDeconstruct()
+      Utility.Wait(1.0)
 	  RegisterForActorValueChangedEvent(PlayerRef, Intoxication_Alcoholism)
 	  RegisterForActorValueChangedEvent(PlayerRef, Intoxication_Caffeinophagia)
 	  RegisterForActorValueChangedEvent(PlayerRef, Intoxication_CognitiveDissolution)
@@ -759,4 +770,7 @@ Function Update()
 	  RegisterForActorValueChangedEvent(PlayerRef, Intoxication_ParanoidTreatment)
 	  RegisterForActorValueChangedEvent(PlayerRef, Intoxication_StimulantsAddiction)
 	  RegisterForActorValueChangedEvent(PlayerRef, Intoxication_Obesity)
+      RegisterForMenuOpenCloseEvent("DataMenu")
+	  PercentageTracker()	  
+      PlayerRef.AddSpell(IntoxicationWarningSpell, False)
 EndFunction
